@@ -1,0 +1,34 @@
+tile.tinOre.name=Tin Ore
+tile.leadOre.name=Lead Ore
+tile.copperOre.name=Copper Ore
+tile.zechoriumOre.name=Zechorium Ore
+tile.tinBlock.name=Tin Block
+tile.leadBlock.name=Lead Block
+tile.copperBlock.name=Copper Block
+tile.alloyFurnaceCoalActive.name=Alloy Furnace (Stone)
+tile.alloyFurnaceCoalIdle.name=Alloy Furnace (Stone)
+tile.alloyFurnaceBasicActive.name=Alloy Furnace (Basic)
+tile.alloyFurnaceBasicIdle.name=Alloy Furnace (Basic)
+tile.rockPummelerBasicActive.name=Rock Pummeler (Basic)
+tile.rockPummelerBasicIdle.name=Rock Pummeler (Basic)
+tile.zechoriumExciterActive.name=Zechorium Exciter
+tile.zechoriumExciterIdle.name=Zechorium Exciter
+
+item.tinIngot.name=Tin Ingot
+item.leadIngot.name=Lead Ingot
+item.copperIngot.name=Copper Ingot
+item.zechoriumCrystal.name=Zechorium Crystal
+item.tinDust.name=Pummeled Tin
+item.leadDust.name=Pummeled Lead
+item.copperDust.name=Pummeled Copper
+item.solderLump.name=Lump of Solder
+item.ironHammer.name=Iron Hammer
+item.ironHammerHead.name=Iron Hammer Head
+item.solderWire.name=Solder
+item.copperWire.name=Copper Wire
+item.solderingIron.name=Soldering Iron
+item.stoneBoard.name=Stone Board
+item.pcbBlank.name=PCB (Blank)
+item.pcbBasic.name=PCB (Basic)
+
+itemGroup.TabZeb=ZebTech
