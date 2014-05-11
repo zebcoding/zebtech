@@ -25,8 +25,6 @@ public class BlockAlloySmelterBasic extends BlockContainer {
 
     @SideOnly(Side.CLIENT)
     private IIcon iconFront;
-    @SideOnly(Side.CLIENT)
-    private IIcon iconTop;
 
     public static boolean keepInventory;
 
