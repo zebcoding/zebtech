@@ -21,12 +21,15 @@ public class ZBlocks {
     public static Block rockPummelerBasicActive;
     public static Block zechoriumExciterIdle;
     public static Block zechoriumExciterActive;
+    public static Block zechoriumInfuserIdle;
+    public static Block zechoriumInfuserActive;
     public static Block pipe;
 
     public static final int guiIDAlloySmelterCoal = 0;
     public static final int guiIDAlloySmelterBasic = 1;
     public static final int guiIDRockPummelerBasic = 2;
     public static final int guiIDZechoriumExciter = 3;
+    public static final int guiIDZechoriumInfuser = 4;
 
     public static void init() {
         final Block[] blocks = new Block[]{
@@ -46,6 +49,8 @@ public class ZBlocks {
                 rockPummelerBasicActive = new BlockRockPummelerBasic(true),
                 zechoriumExciterIdle = new BlockZechoriumExciter(false),
                 zechoriumExciterActive = new BlockZechoriumExciter(true),
+                zechoriumInfuserIdle = new BlockZechoriumInfuser(false),
+                zechoriumInfuserActive = new BlockZechoriumInfuser(true),
                 pipe = new BlockPipe()
         };
 

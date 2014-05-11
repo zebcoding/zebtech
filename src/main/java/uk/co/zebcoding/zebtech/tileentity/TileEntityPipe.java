@@ -40,27 +40,33 @@ public class TileEntityPipe extends TileEntity {
      */
     public void updateConnections() {
         if (this.worldObj.getTileEntity(xCoord + 0, yCoord + 1, zCoord + 0) instanceof TileEntityPipe ||
-                this.worldObj.getTileEntity(xCoord + 0, yCoord + 1, zCoord + 0) instanceof TileEntityZechoriumExciter)
+                this.worldObj.getTileEntity(xCoord + 0, yCoord + 1, zCoord + 0) instanceof TileEntityZechoriumExciter ||
+                this.worldObj.getTileEntity(xCoord + 0, yCoord + 1, zCoord + 0) instanceof TileEntityUsesZechorium)
             c[0] = ForgeDirection.UP;
         else c[0] = null;
         if (this.worldObj.getTileEntity(xCoord + 0, yCoord - 1, zCoord + 0) instanceof TileEntityPipe ||
-                this.worldObj.getTileEntity(xCoord + 0, yCoord - 1, zCoord + 0) instanceof TileEntityZechoriumExciter)
+                this.worldObj.getTileEntity(xCoord + 0, yCoord - 1, zCoord + 0) instanceof TileEntityZechoriumExciter ||
+                this.worldObj.getTileEntity(xCoord + 0, yCoord - 1, zCoord + 0) instanceof TileEntityUsesZechorium)
             c[1] = ForgeDirection.DOWN;
         else c[1] = null;
         if (this.worldObj.getTileEntity(xCoord + 0, yCoord + 0, zCoord - 1) instanceof TileEntityPipe ||
-                this.worldObj.getTileEntity(xCoord + 0, yCoord + 0, zCoord - 1) instanceof TileEntityZechoriumExciter)
+                this.worldObj.getTileEntity(xCoord + 0, yCoord + 0, zCoord - 1) instanceof TileEntityZechoriumExciter ||
+                this.worldObj.getTileEntity(xCoord + 0, yCoord + 0, zCoord - 1) instanceof TileEntityUsesZechorium)
             c[2] = ForgeDirection.NORTH;
         else c[2] = null;
         if (this.worldObj.getTileEntity(xCoord + 1, yCoord + 0, zCoord + 0) instanceof TileEntityPipe ||
-                this.worldObj.getTileEntity(xCoord + 1, yCoord + 0, zCoord + 0) instanceof TileEntityZechoriumExciter)
+                this.worldObj.getTileEntity(xCoord + 1, yCoord + 0, zCoord + 0) instanceof TileEntityZechoriumExciter ||
+                this.worldObj.getTileEntity(xCoord + 1, yCoord + 0, zCoord + 0) instanceof TileEntityUsesZechorium)
             c[3] = ForgeDirection.EAST;
         else c[3] = null;
         if (this.worldObj.getTileEntity(xCoord + 0, yCoord + 0, zCoord + 1) instanceof TileEntityPipe ||
-                this.worldObj.getTileEntity(xCoord + 0, yCoord + 0, zCoord + 1) instanceof TileEntityZechoriumExciter)
+                this.worldObj.getTileEntity(xCoord + 0, yCoord + 0, zCoord + 1) instanceof TileEntityZechoriumExciter ||
+                this.worldObj.getTileEntity(xCoord + 0, yCoord + 0, zCoord + 1) instanceof TileEntityUsesZechorium)
             c[4] = ForgeDirection.SOUTH;
         else c[4] = null;
         if (this.worldObj.getTileEntity(xCoord - 1, yCoord + 0, zCoord + 0) instanceof TileEntityPipe ||
-                this.worldObj.getTileEntity(xCoord - 1, yCoord + 0, zCoord + 0) instanceof TileEntityZechoriumExciter)
+                this.worldObj.getTileEntity(xCoord - 1, yCoord + 0, zCoord + 0) instanceof TileEntityZechoriumExciter ||
+                this.worldObj.getTileEntity(xCoord - 1, yCoord + 0, zCoord + 0) instanceof TileEntityUsesZechorium)
             c[5] = ForgeDirection.WEST;
         else c[5] = null;
     }
@@ -139,11 +145,9 @@ public class TileEntityPipe extends TileEntity {
                         if (stored1 > stored2) {
                             stored1--;
                             stored2++;
-                            System.out.println("FILLING");
                         } else {
                             stored1++;
                             stored2--;
-                            System.out.println("FILLING");
                         }
                     }
 
@@ -160,6 +164,21 @@ public class TileEntityPipe extends TileEntity {
                     while (!(stored1 >= this.maxLiq || stored2 <= 0)) {
                         stored1++;
                         stored2--;
+                    }
+
+                    this.tank.setFluid(new FluidStack(ZFluids.liquidZechorium, stored1));
+                    e.tank.setFluid(new FluidStack(ZFluids.liquidZechorium, stored2));
+                }
+
+                if (te instanceof TileEntityUsesZechorium) {
+                    TileEntityUsesZechorium e = (TileEntityUsesZechorium) te;
+
+                    int stored1 = this.tank.getFluidAmount();
+                    int stored2 = e.tank.getFluidAmount();
+
+                    while (!(stored1 <= 0 || stored2 >= e.maxLiq)) {
+                        stored1--;
+                        stored2++;
                     }
 
                     this.tank.setFluid(new FluidStack(ZFluids.liquidZechorium, stored1));

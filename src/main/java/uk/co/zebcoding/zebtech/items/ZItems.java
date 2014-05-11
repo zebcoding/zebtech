@@ -7,6 +7,7 @@ public class ZItems {
     public static Item tinIngot;
     public static Item leadIngot;
     public static Item copperIngot;
+    public static Item infusedIngot;
     public static Item zechoriumCrystal;
     public static Item tinDust;
     public static Item leadDust;
@@ -26,6 +27,7 @@ public class ZItems {
                 tinIngot = new ItemTinIngot(),
                 leadIngot = new ItemLeadIngot(),
                 copperIngot = new ItemCopperIngot(),
+                infusedIngot = new ItemInfusedIngot(),
                 zechoriumCrystal = new ItemZechoriumCrystal(),
                 tinDust = new ItemDust("tinDust"),
                 leadDust = new ItemDust("leadDust"),

@@ -9,6 +9,7 @@ public class ZTileEntity {
         GameRegistry.registerTileEntity(TileEntityAlloySmelterBasic.class, "alloySmelterBasic");
         GameRegistry.registerTileEntity(TileEntityRockPummelerBasic.class, "rockPummelerBasic");
         GameRegistry.registerTileEntity(TileEntityZechoriumExciter.class, "zechoriumExciter");
+        GameRegistry.registerTileEntity(TileEntityZechoriumInfuser.class, "zechoriumInfuser");
         GameRegistry.registerTileEntity(TileEntityPipe.class, "pipe");
     }
 }

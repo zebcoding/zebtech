@@ -5,14 +5,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import uk.co.zebcoding.zebtech.blocks.ZBlocks;
-import uk.co.zebcoding.zebtech.container.ContainerAlloySmelterBasic;
-import uk.co.zebcoding.zebtech.container.ContainerAlloySmelterCoal;
-import uk.co.zebcoding.zebtech.container.ContainerRockPummelerBasic;
-import uk.co.zebcoding.zebtech.container.ContainerZechoriumExciter;
-import uk.co.zebcoding.zebtech.tileentity.TileEntityAlloySmelterBasic;
-import uk.co.zebcoding.zebtech.tileentity.TileEntityAlloySmelterCoal;
-import uk.co.zebcoding.zebtech.tileentity.TileEntityRockPummelerBasic;
-import uk.co.zebcoding.zebtech.tileentity.TileEntityZechoriumExciter;
+import uk.co.zebcoding.zebtech.container.*;
+import uk.co.zebcoding.zebtech.tileentity.*;
 
 public class ZCommonProxy implements IGuiHandler {
 
@@ -49,6 +43,11 @@ public class ZCommonProxy implements IGuiHandler {
                     if (entity instanceof TileEntityZechoriumExciter) {
                         return new ContainerZechoriumExciter(player.inventory,
                                 (TileEntityZechoriumExciter) entity);
+                    }
+                case ZBlocks.guiIDZechoriumInfuser:
+                    if (entity instanceof TileEntityZechoriumInfuser) {
+                        return new ContainerZechoriumInfuser(player.inventory,
+                                (TileEntityZechoriumInfuser) entity);
                     }
             }
         }

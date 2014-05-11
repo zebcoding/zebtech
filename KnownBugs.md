@@ -11,4 +11,7 @@ Major Bugs.
 Minor Bugs.
 -----------
 * Pipe lighting likes to glitch tremendously.
-* Pipe bounding boxes are not working correctly.
+* Pipe bounding boxes are glitchy.
+* Pipes are missing an item texture.
+* GUIs don't always update to reflect zechorium amounts.
+* A number of localization issues.

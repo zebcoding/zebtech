@@ -6,10 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import uk.co.zebcoding.zebtech.blocks.ZBlocks;
-import uk.co.zebcoding.zebtech.gui.GuiAlloySmelterBasic;
-import uk.co.zebcoding.zebtech.gui.GuiAlloySmelterCoal;
-import uk.co.zebcoding.zebtech.gui.GuiRockPummelerBasic;
-import uk.co.zebcoding.zebtech.gui.GuiZechoriumExciter;
+import uk.co.zebcoding.zebtech.gui.*;
 import uk.co.zebcoding.zebtech.tileentity.*;
 import uk.co.zebcoding.zebtech.tileentity.renderer.TileEntityRenderPipe;
 
@@ -41,6 +38,11 @@ public class ZClientProxy extends ZCommonProxy {
                     if (entity instanceof TileEntityZechoriumExciter) {
                         return new GuiZechoriumExciter(player.inventory,
                                 (TileEntityZechoriumExciter) entity);
+                    }
+                case ZBlocks.guiIDZechoriumInfuser:
+                    if (entity instanceof TileEntityZechoriumInfuser) {
+                        return new GuiZechoriumInfuser(player.inventory,
+                                (TileEntityZechoriumInfuser) entity);
                     }
             }
         }
