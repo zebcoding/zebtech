@@ -48,8 +48,8 @@ public class BlockZechoriumExciter extends BlockContainer {
                 + "basicMachineSide");
         this.iconFront = iconRegister.registerIcon(Reference.MODID
                 + ":"
-                + (this.isActive ? "alloySmelterBasicFrontActive"
-                : "alloySmelterBasicFrontIdle"));
+                + (this.isActive ? "zechoriumExciterFrontActive"
+                : "zechoriumExciterFrontIdle"));
 
     }
 

@@ -45,11 +45,10 @@ public class BlockZechoriumInfuser extends BlockContainer {
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconRegister) {
         this.blockIcon = iconRegister.registerIcon(Reference.MODID + ":"
-                + "basicMachineSide");
-        this.iconFront = iconRegister.registerIcon(Reference.MODID
-                + ":"
-                + (this.isActive ? "alloySmelterBasicFrontActive"
-                : "alloySmelterBasicFrontIdle"));
+                + "advancedMachineSide");
+        this.iconFront = iconRegister.registerIcon(Reference.MODID + ":"
+                + (this.isActive ? "zechoriumInfuserFrontActive"
+                : "zechoriumInfuserFrontIdle"));
 
     }
 

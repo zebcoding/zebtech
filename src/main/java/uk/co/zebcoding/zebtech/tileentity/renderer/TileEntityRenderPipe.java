@@ -49,8 +49,85 @@ public class TileEntityRenderPipe extends TileEntitySpecialRenderer {
             }
         }
 
+        for (int i = 0; i < p.mc.length; i++) {
+            if (p.mc[i] != null) {
+                drawMachine(p.mc[i]);
+            }
+        }
+
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glTranslated(-transX, -transY, -transZ);
+    }
+
+    /**
+     * Draws a machine connection.
+     *
+     * @param d = direction to draw connection.
+     */
+    public void drawMachine(ForgeDirection d) {
+
+        Tessellator tes = Tessellator.instance;
+        tes.startDrawingQuads();
+
+        GL11.glTranslatef(0.5F, 0.5F, 0.5F);
+        if (d.equals(ForgeDirection.UP)) {
+
+        } else if (d.equals(ForgeDirection.DOWN)) {
+            GL11.glRotatef(180.0F, 1.0F, 0.0F, 0.0F);
+        } else if (d.equals(ForgeDirection.NORTH)) {
+            GL11.glRotatef(270.0F, 1.0F, 0.0F, 0.0F);
+        } else if (d.equals(ForgeDirection.SOUTH)) {
+            GL11.glRotatef(90.0F, 1.0F, 0.0F, 0.0F);
+        } else if (d.equals(ForgeDirection.WEST)) {
+            GL11.glRotatef(90.0F, 0.0F, 0.0F, 1.0F);
+        } else if (d.equals(ForgeDirection.EAST)) {
+            GL11.glRotatef(270.0F, 0.0F, 0.0F, 1.0F);
+        }
+        GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
+
+        tes.addVertexWithUV(1 - 9 * p / 2, 1 - 6 * p / 2, 1 - 9 * p / 2, 21 * tp, 7 * tp);
+        tes.addVertexWithUV(1 - 9 * p / 2, 1 + 6 * 0 / 2, 1 - 9 * p / 2, 24 * tp, 7 * tp);
+        tes.addVertexWithUV(0 + 9 * p / 2, 1 + 6 * 0 / 2, 1 - 9 * p / 2, 24 * tp, 0 * tp);
+        tes.addVertexWithUV(0 + 9 * p / 2, 1 - 6 * p / 2, 1 - 9 * p / 2, 21 * tp, 0 * tp);
+
+        tes.addVertexWithUV(0 + 9 * p / 2, 1 - 6 * p / 2, 0 + 9 * p / 2, 21 * tp, 0 * tp);
+        tes.addVertexWithUV(0 + 9 * p / 2, 1 + 6 * 0 / 2, 0 + 9 * p / 2, 24 * tp, 0 * tp);
+        tes.addVertexWithUV(1 - 9 * p / 2, 1 + 6 * 0 / 2, 0 + 9 * p / 2, 24 * tp, 7 * tp);
+        tes.addVertexWithUV(1 - 9 * p / 2, 1 - 6 * p / 2, 0 + 9 * p / 2, 21 * tp, 7 * tp);
+
+        tes.addVertexWithUV(1 - 9 * p / 2, 1 - 6 * p / 2, 0 + 9 * p / 2, 21 * tp, 0 * tp);
+        tes.addVertexWithUV(1 - 9 * p / 2, 1 + 6 * 0 / 2, 0 + 9 * p / 2, 24 * tp, 0 * tp);
+        tes.addVertexWithUV(1 - 9 * p / 2, 1 + 6 * 0 / 2, 1 - 9 * p / 2, 24 * tp, 7 * tp);
+        tes.addVertexWithUV(1 - 9 * p / 2, 1 - 6 * p / 2, 1 - 9 * p / 2, 21 * tp, 7 * tp);
+
+        tes.addVertexWithUV(0 + 9 * p / 2, 1 - 6 * p / 2, 1 - 9 * p / 2, 21 * tp, 7 * tp);
+        tes.addVertexWithUV(0 + 9 * p / 2, 1 + 6 * 0 / 2, 1 - 9 * p / 2, 24 * tp, 7 * tp);
+        tes.addVertexWithUV(0 + 9 * p / 2, 1 + 6 * 0 / 2, 0 + 9 * p / 2, 24 * tp, 0 * tp);
+        tes.addVertexWithUV(0 + 9 * p / 2, 1 - 6 * p / 2, 0 + 9 * p / 2, 21 * tp, 0 * tp);
+
+        tes.addVertexWithUV(1 - 9 * p / 2, 1 - 6 * p / 2, 1 - 9 * p / 2, 24 * tp, 7 * tp);
+        tes.addVertexWithUV(0 + 9 * p / 2, 1 - 6 * p / 2, 1 - 9 * p / 2, 31 * tp, 7 * tp);
+        tes.addVertexWithUV(0 + 9 * p / 2, 1 - 6 * p / 2, 0 + 9 * p / 2, 31 * tp, 0 * tp);
+        tes.addVertexWithUV(1 - 9 * p / 2, 1 - 6 * p / 2, 0 + 9 * p / 2, 24 * tp, 0 * tp);
+
+        tes.draw();
+
+
+        GL11.glTranslatef(0.5F, 0.5F, 0.5F);
+        if (d.equals(ForgeDirection.UP)) {
+
+        } else if (d.equals(ForgeDirection.DOWN)) {
+            GL11.glRotatef(-180.0F, 1.0F, 0.0F, 0.0F);
+        } else if (d.equals(ForgeDirection.NORTH)) {
+            GL11.glRotatef(-270.0F, 1.0F, 0.0F, 0.0F);
+        } else if (d.equals(ForgeDirection.SOUTH)) {
+            GL11.glRotatef(-90.0F, 1.0F, 0.0F, 0.0F);
+        } else if (d.equals(ForgeDirection.WEST)) {
+            GL11.glRotatef(-90.0F, 0.0F, 0.0F, 1.0F);
+        } else if (d.equals(ForgeDirection.EAST)) {
+            GL11.glRotatef(-270.0F, 0.0F, 0.0F, 1.0F);
+        }
+        GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
     }
 
     /**

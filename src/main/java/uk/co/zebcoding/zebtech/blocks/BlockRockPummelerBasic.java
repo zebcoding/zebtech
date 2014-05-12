@@ -25,8 +25,6 @@ public class BlockRockPummelerBasic extends BlockContainer {
     private final boolean isActive;
     @SideOnly(Side.CLIENT)
     private IIcon iconFront;
-    @SideOnly(Side.CLIENT)
-    private IIcon iconTop;
 
     public BlockRockPummelerBasic(boolean isActive) {
         super(Material.rock);
@@ -94,8 +92,8 @@ public class BlockRockPummelerBasic extends BlockContainer {
                 + "basicMachineSide");
         this.iconFront = iconRegister.registerIcon(Reference.MODID
                 + ":"
-                + (this.isActive ? "alloySmelterBasicFrontActive"
-                : "alloySmelterBasicFrontIdle"));
+                + (this.isActive ? "rockPummelerBasicFrontActive"
+                : "rockPummelerBasicFrontIdle"));
 
     }
 
