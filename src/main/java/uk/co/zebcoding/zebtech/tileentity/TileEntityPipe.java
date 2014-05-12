@@ -20,22 +20,27 @@ public class TileEntityPipe extends TileEntity {
      * Machine connections, UP, DOWN, NORTH, EAST, SOUTH, WEST.
      */
     public ForgeDirection[] mc = new ForgeDirection[6];
-
-    /**
-     * Amount of liquid the pipe can store.
-     */
-    int maxLiq = 1000 / 2;
-
     /**
      * The pipes storage.
      */
     public FluidTank tank;
+    public int stored;
+    /**
+     * Amount of liquid the pipe can store.
+     */
+    int maxLiq = 1000 / 2;
 
     public TileEntityPipe() {
         tank = new FluidTank(new FluidStack(ZFluids.liquidZechorium, 0), maxLiq);
     }
 
     public void updateEntity() {
+        if (!this.worldObj.isRemote)
+            if (this.stored != this.tank.getFluidAmount()) {
+                this.stored = this.tank.getFluidAmount();
+                this.markDirty();
+                worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+            }
         this.updateConnections();
         this.updateMachineConnections();
         this.balanceLiquid();
@@ -157,18 +162,24 @@ public class TileEntityPipe extends TileEntity {
         for (int i = 0; i < this.c.length; i++) {
             if (this.c[i] != null) {
                 TileEntity te = null;
-                if (i == 0) {
-                    te = this.worldObj.getTileEntity(xCoord + 0, yCoord + 1, zCoord + 0);
-                } else if (i == 1) {
-                    te = this.worldObj.getTileEntity(xCoord + 0, yCoord - 1, zCoord + 0);
-                } else if (i == 2) {
-                    te = this.worldObj.getTileEntity(xCoord + 0, yCoord + 0, zCoord - 1);
-                } else if (i == 3) {
-                    te = this.worldObj.getTileEntity(xCoord + 1, yCoord + 0, zCoord + 0);
-                } else if (i == 4) {
-                    te = this.worldObj.getTileEntity(xCoord + 0, yCoord + 0, zCoord + 1);
-                } else if (i == 5) {
-                    te = this.worldObj.getTileEntity(xCoord - 1, yCoord + 0, zCoord + 0);
+                switch (i) {
+                    case (0):
+                        te = this.worldObj.getTileEntity(xCoord + 0, yCoord + 1, zCoord + 0);
+                        break;
+                    case (1):
+                        te = this.worldObj.getTileEntity(xCoord + 0, yCoord - 1, zCoord + 0);
+                        break;
+                    case (2):
+                        te = this.worldObj.getTileEntity(xCoord + 0, yCoord + 0, zCoord - 1);
+                        break;
+                    case (3):
+                        te = this.worldObj.getTileEntity(xCoord + 1, yCoord + 0, zCoord + 0);
+                        break;
+                    case (4):
+                        te = this.worldObj.getTileEntity(xCoord + 0, yCoord + 0, zCoord + 1);
+                        break;
+                    case (5):
+                        te = this.worldObj.getTileEntity(xCoord - 1, yCoord + 0, zCoord + 0);
                 }
 
                 if (te instanceof TileEntityPipe) {
@@ -176,45 +187,49 @@ public class TileEntityPipe extends TileEntity {
 
                     int stored1 = this.tank.getFluidAmount();
                     int stored2 = p.tank.getFluidAmount();
+                    int stored3 = (stored1 + stored2) / 2;
 
-                    while (!(stored1 == stored2 || stored1 + 1 == stored2 || stored1 == stored2 + 1)) {
-                        if (stored1 > stored2) {
-                            stored1--;
-                            stored2++;
-                        } else {
-                            stored1++;
-                            stored2--;
-                        }
-                    }
+                    if (stored3 * 2 > stored1 + stored2) {
+                        stored1 = stored3 - 1;
+                        stored2 = stored3;
+                    } else if (stored3 * 2 < stored1 + stored2) {
+                        stored1 = stored3;
+                        stored2 = stored3 + 1;
+                    } else
+                        stored1 = stored2 = stored3;
 
                     this.tank.setFluid(new FluidStack(ZFluids.liquidZechorium, stored1));
                     p.tank.setFluid(new FluidStack(ZFluids.liquidZechorium, stored2));
-                }
-
-                if (te instanceof TileEntityZechoriumExciter) {
+                } else if (te instanceof TileEntityZechoriumExciter) {
                     TileEntityZechoriumExciter e = (TileEntityZechoriumExciter) te;
 
                     int stored1 = this.tank.getFluidAmount();
                     int stored2 = e.tank.getFluidAmount();
+                    int stored3 = (this.tank.getCapacity() - stored1);
 
-                    while (!(stored1 >= this.maxLiq || stored2 <= 0)) {
-                        stored1++;
-                        stored2--;
+                    if (stored2 >= stored3) {
+                        stored1 = this.tank.getCapacity();
+                        stored2 -= stored3;
+                    } else {
+                        stored1 += stored2;
+                        stored2 = 0;
                     }
 
                     this.tank.setFluid(new FluidStack(ZFluids.liquidZechorium, stored1));
                     e.tank.setFluid(new FluidStack(ZFluids.liquidZechorium, stored2));
-                }
-
-                if (te instanceof TileEntityUsesZechorium) {
+                } else if (te instanceof TileEntityUsesZechorium) {
                     TileEntityUsesZechorium e = (TileEntityUsesZechorium) te;
 
                     int stored1 = this.tank.getFluidAmount();
                     int stored2 = e.tank.getFluidAmount();
+                    int stored3 = (e.tank.getCapacity() - stored2);
 
-                    while (!(stored1 <= 0 || stored2 >= e.maxLiq)) {
-                        stored1--;
-                        stored2++;
+                    if (stored1 > stored3) {
+                        stored1 -= stored3;
+                        stored2 = e.tank.getCapacity();
+                    } else {
+                        stored2 += stored1;
+                        stored1 = 0;
                     }
 
                     this.tank.setFluid(new FluidStack(ZFluids.liquidZechorium, stored1));

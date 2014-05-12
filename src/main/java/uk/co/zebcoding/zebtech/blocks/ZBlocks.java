@@ -24,6 +24,7 @@ public class ZBlocks {
     public static Block zechoriumInfuserIdle;
     public static Block zechoriumInfuserActive;
     public static Block pipe;
+    public static Block tank;
 
     public static final int guiIDAlloySmelterCoal = 0;
     public static final int guiIDAlloySmelterBasic = 1;
@@ -51,7 +52,8 @@ public class ZBlocks {
                 zechoriumExciterActive = new BlockZechoriumExciter(true),
                 zechoriumInfuserIdle = new BlockZechoriumInfuser(false),
                 zechoriumInfuserActive = new BlockZechoriumInfuser(true),
-                pipe = new BlockPipe()
+                pipe = new BlockPipe(),
+                tank = new BlockTank()
         };
 
         for (int i = 0; i < blocks.length; i++) {

@@ -1,15 +1,16 @@
 package uk.co.zebcoding.zebtech.tileentity.renderer;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.opengl.GL11;
 import uk.co.zebcoding.zebtech.help.Reference;
-import uk.co.zebcoding.zebtech.tileentity.TileEntityPipe;
 
-public class TileEntityRenderPipe extends TileEntitySpecialRenderer {
+public class TileEntityRenderPipeItem implements IItemRenderer {
 
     /**
      * Resource loc. for the pipe texture.
@@ -25,38 +26,26 @@ public class TileEntityRenderPipe extends TileEntitySpecialRenderer {
     float tp = 1.0F / 32.0F;
 
     @Override
-    public void renderTileEntityAt(TileEntity te, double transX, double transY, double transZ, float f) {
-        GL11.glTranslated(transX, transY, transZ);
+    public boolean handleRenderType(ItemStack item, ItemRenderType type) {
+        return true;
+    }
+
+    @Override
+    public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
+        return helper != ItemRendererHelper.ENTITY_BOBBING && helper != ItemRendererHelper.ENTITY_ROTATION;
+    }
+
+    @Override
+    public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
         GL11.glDisable(GL11.GL_LIGHTING);
-        this.bindTexture(t);
+        Minecraft.getMinecraft().getTextureManager().bindTexture(t);
 
-        TileEntityPipe p = (TileEntityPipe) te;
+        drawStraight(ForgeDirection.NORTH);
 
-        if (!p.oneOppositeConnection(p.c)) {
-            drawCore(te);
-
-            for (int i = 0; i < p.c.length; i++) {
-                if (p.c[i] != null) {
-                    drawConnection(p.c[i]);
-                }
-            }
-        } else {
-            for (int i = 0; i < p.c.length; i++) {
-                if (p.c[i] != null) {
-                    drawStraight(p.c[i]);
-                    break;
-                }
-            }
-        }
-
-        for (int i = 0; i < p.mc.length; i++) {
-            if (p.mc[i] != null) {
-                drawMachine(p.mc[i]);
-            }
-        }
+        drawMachine(ForgeDirection.NORTH);
+        drawMachine(ForgeDirection.SOUTH);
 
         GL11.glEnable(GL11.GL_LIGHTING);
-        GL11.glTranslated(-transX, -transY, -transZ);
     }
 
     /**

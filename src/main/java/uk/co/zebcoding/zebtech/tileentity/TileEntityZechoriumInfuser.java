@@ -175,7 +175,7 @@ public class TileEntityZechoriumInfuser extends TileEntityUsesZechorium implemen
 
     @SideOnly(Side.CLIENT)
     public int getLiquidLevelScaled(int par1) {
-        int x = this.stored * par1 / this.maxLiq;
+        int x = this.stored * par1 / this.tank.getCapacity();
         return x;
     }
 

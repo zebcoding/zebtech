@@ -8,17 +8,17 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fluids.FluidStack;
 import uk.co.zebcoding.zebtech.fluids.ZFluids;
-import uk.co.zebcoding.zebtech.tileentity.TileEntityPipe;
+import uk.co.zebcoding.zebtech.tileentity.TileEntityTank;
 
-public class MessageTileEntityPipe implements IMessage, IMessageHandler<MessageTileEntityPipe, IMessage> {
+public class MessageTileEntityTank implements IMessage, IMessageHandler<MessageTileEntityTank, IMessage> {
     public int x, y, z;
     public int stored;
     public String fluid;
 
-    public MessageTileEntityPipe() {
+    public MessageTileEntityTank() {
     }
 
-    public MessageTileEntityPipe(TileEntityPipe tileEntity) {
+    public MessageTileEntityTank(TileEntityTank tileEntity) {
         this.x = tileEntity.xCoord;
         this.y = tileEntity.yCoord;
         this.z = tileEntity.zCoord;
@@ -42,12 +42,12 @@ public class MessageTileEntityPipe implements IMessage, IMessageHandler<MessageT
     }
 
     @Override
-    public IMessage onMessage(MessageTileEntityPipe message, MessageContext ctx) {
+    public IMessage onMessage(MessageTileEntityTank message, MessageContext ctx) {
         TileEntity tileEntity = FMLClientHandler.instance().getClient().theWorld.getTileEntity(message.x, message.y, message.z);
 
-        if (tileEntity instanceof TileEntityPipe) {
-            ((TileEntityPipe) tileEntity).stored = message.stored;
-            ((TileEntityPipe) tileEntity).tank.setFluid(new FluidStack(ZFluids.liquidZechorium, message.stored));
+        if (tileEntity instanceof TileEntityTank) {
+            ((TileEntityTank) tileEntity).stored = message.stored;
+            ((TileEntityTank) tileEntity).tank.setFluid(new FluidStack(ZFluids.liquidZechorium, message.stored));
         }
 
         return null;

@@ -13,10 +13,16 @@ tile.rockPummelerBasicActive.name=Rock Pummeler (Basic)
 tile.rockPummelerBasicIdle.name=Rock Pummeler (Basic)
 tile.zechoriumExciterActive.name=Zechorium Exciter
 tile.zechoriumExciterIdle.name=Zechorium Exciter
+tile.zechoriumInfuserActive.name=Zechorium Infuser
+tile.zechoriumInfuserIdle.name=Zechorium Infuser
+tile.liquidZechorium.name=Liquid Zechorium
+tile.blockPipe.name=Zechorium Duct
+tile.blockTank.name=Zechorium Tank
 
 item.tinIngot.name=Tin Ingot
 item.leadIngot.name=Lead Ingot
 item.copperIngot.name=Copper Ingot
+item.infusedIngot.name=Zechorium Infused Ingot
 item.zechoriumCrystal.name=Zechorium Crystal
 item.tinDust.name=Pummeled Tin
 item.leadDust.name=Pummeled Lead
