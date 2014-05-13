@@ -22,8 +22,8 @@ import uk.co.zebcoding.zebtech.fluids.ZFluids;
 import uk.co.zebcoding.zebtech.network.PacketHandler;
 import uk.co.zebcoding.zebtech.network.message.MessageTileEntityZechoriumExciter;
 
-public class TileEntityZechoriumExciter extends TileEntity implements
-        ISidedInventory {
+public class TileEntityZechoriumExciter extends TileEntityProvidesZechorium implements
+ISidedInventory {
 
     private static final int[] slotsTop = new int[]{0};
     private static final int[] slotsBottom = new int[]{2, 1};
@@ -201,18 +201,20 @@ public class TileEntityZechoriumExciter extends TileEntity implements
     }
 
     public void updateEntity() {
+        updateConnections();
+        balanceLiquid();
         boolean flag = this.burnTime > 0;
         boolean flag1 = false;
 
         if (this.burnTime > 0) {
             --this.burnTime;
         }
+        if (this.stored != this.tank.getFluidAmount()) {
+            this.stored = this.tank.getFluidAmount();
+            flag1 = true;
+        }
 
         if (!this.worldObj.isRemote) {
-            if (this.stored != this.tank.getFluidAmount()) {
-                this.stored = this.tank.getFluidAmount();
-                flag1 = true;
-            }
 
             if (this.burnTime == 0 && this.canSmelt()) {
                 this.currentItemBurnTime = this.burnTime = getItemBurnTime(this.furnaceItemStacks[1]);
@@ -374,6 +376,90 @@ public class TileEntityZechoriumExciter extends TileEntity implements
     @Override
     public boolean canExtractItem(int par1, ItemStack itemstack, int par3) {
         return par3 != 0 || par1 != 1 || itemstack.getItem() == Items.bucket;
+    }
+
+    /**
+     * Balances liquid between 2 tanks.*
+     */
+    public void balanceLiquid() {
+        TileEntityProvidesZechorium current = this;
+        TileEntityZechoriumExciter producer = this;
+        TileEntityUsesZechorium consumer = null;
+        boolean updated = true;
+        int prev = 10;
+        while (consumer == null) {
+            for (int i = 0; i < current.c.length; i++) {
+                if (current.c[i] != null && i != getOppSide(prev)) {
+                    TileEntity te = null;
+
+                    if (i == 0) {
+                        te = this.worldObj.getTileEntity(current.xCoord + 0, current.yCoord + 1, current.zCoord + 0);
+
+                    } else if (i == 1) {
+                        te = this.worldObj.getTileEntity(current.xCoord + 0, current.yCoord - 1, current.zCoord + 0);
+
+                    } else if (i == 2) {
+                        te = this.worldObj.getTileEntity(current.xCoord + 0, current.yCoord + 0, current.zCoord - 1);
+
+                    } else if (i == 3) {
+                        te = this.worldObj.getTileEntity(current.xCoord + 1, current.yCoord + 0, current.zCoord + 0);
+
+                    } else if (i == 4) {
+                        te = this.worldObj.getTileEntity(current.xCoord + 0, current.yCoord + 0, current.zCoord + 1);
+
+                    } else if (i == 5) {
+                        te = this.worldObj.getTileEntity(current.xCoord - 1, current.yCoord + 0, current.zCoord + 0);
+                    }
+                    if (te instanceof TileEntityUsesZechorium) {
+                        consumer = (TileEntityUsesZechorium) te;
+                        updated = true;
+                    } else if (te instanceof TileEntityPipe) {
+                        current = (TileEntityProvidesZechorium) te;
+                        updated = true;
+                    }
+                    prev = i;
+                }
+            }
+            if (!updated) return;
+            updated = false;
+        }
+
+        FluidStack stack = producer.tank.drain(producer.tank.getCapacity(), false);
+        int canDrain;
+        if (stack != null) {
+            canDrain = stack.amount;
+        } else {
+            canDrain = 0;
+        }
+        int canFill = consumer.tank.fill(new FluidStack(ZFluids.liquidZechorium, consumer.tank.getCapacity()), false);
+
+        if (!(canDrain == 0 || canFill == 0)) {
+            if (canDrain > canFill) {
+                producer.tank.drain(canFill, true);
+                consumer.tank.fill(new FluidStack(ZFluids.liquidZechorium, canFill), true);
+            } else {
+                producer.tank.drain(canDrain, true);
+                consumer.tank.fill(new FluidStack(ZFluids.liquidZechorium, canDrain), true);
+            }
+        }
+    }
+
+    private int getOppSide(int i) {
+        switch (i) {
+            case (0):
+                return 1;
+            case (1):
+                return 0;
+            case (2):
+                return 4;
+            case (3):
+                return 5;
+            case (4):
+                return 2;
+            case (5):
+                return 3;
+        }
+        return 10;
     }
 
     @Override

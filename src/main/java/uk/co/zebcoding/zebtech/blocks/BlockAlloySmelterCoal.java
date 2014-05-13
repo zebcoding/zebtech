@@ -19,6 +19,8 @@ import uk.co.zebcoding.zebtech.creative.ZebTab;
 import uk.co.zebcoding.zebtech.help.Reference;
 import uk.co.zebcoding.zebtech.tileentity.TileEntityAlloySmelterCoal;
 
+import java.util.Random;
+
 public class BlockAlloySmelterCoal extends BlockContainer {
 
     private final boolean isActive;
@@ -162,7 +164,31 @@ public class BlockAlloySmelterCoal extends BlockContainer {
         return new TileEntityAlloySmelterCoal();
     }
 
-    // TODO randomDisplayTick
+    @SideOnly(Side.CLIENT)
+    public void randomDisplayTick(World p_149734_1_, int p_149734_2_, int p_149734_3_, int p_149734_4_, Random p_149734_5_) {
+        if (this.isActive) {
+            int l = p_149734_1_.getBlockMetadata(p_149734_2_, p_149734_3_, p_149734_4_);
+            float f = (float) p_149734_2_ + 0.5F;
+            float f1 = (float) p_149734_3_ + 0.0F + p_149734_5_.nextFloat() * 6.0F / 16.0F;
+            float f2 = (float) p_149734_4_ + 0.5F;
+            float f3 = 0.52F;
+            float f4 = p_149734_5_.nextFloat() * 0.6F - 0.3F;
+
+            if (l == 4) {
+                p_149734_1_.spawnParticle("smoke", (double) (f - f3), (double) f1, (double) (f2 + f4), 0.0D, 0.0D, 0.0D);
+                p_149734_1_.spawnParticle("flame", (double) (f - f3), (double) f1, (double) (f2 + f4), 0.0D, 0.0D, 0.0D);
+            } else if (l == 5) {
+                p_149734_1_.spawnParticle("smoke", (double) (f + f3), (double) f1, (double) (f2 + f4), 0.0D, 0.0D, 0.0D);
+                p_149734_1_.spawnParticle("flame", (double) (f + f3), (double) f1, (double) (f2 + f4), 0.0D, 0.0D, 0.0D);
+            } else if (l == 2) {
+                p_149734_1_.spawnParticle("smoke", (double) (f + f4), (double) f1, (double) (f2 - f3), 0.0D, 0.0D, 0.0D);
+                p_149734_1_.spawnParticle("flame", (double) (f + f4), (double) f1, (double) (f2 - f3), 0.0D, 0.0D, 0.0D);
+            } else if (l == 3) {
+                p_149734_1_.spawnParticle("smoke", (double) (f + f4), (double) f1, (double) (f2 + f3), 0.0D, 0.0D, 0.0D);
+                p_149734_1_.spawnParticle("flame", (double) (f + f4), (double) f1, (double) (f2 + f3), 0.0D, 0.0D, 0.0D);
+            }
+        }
+    }
 
     public static void updateAlloySmelterCoalBlockState(boolean active,
                                                         World worldObj, int xCoord, int yCoord, int zCoord) {

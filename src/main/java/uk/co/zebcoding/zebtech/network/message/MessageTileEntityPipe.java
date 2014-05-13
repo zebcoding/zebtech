@@ -6,8 +6,6 @@ import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.fluids.FluidStack;
-import uk.co.zebcoding.zebtech.fluids.ZFluids;
 import uk.co.zebcoding.zebtech.tileentity.TileEntityPipe;
 
 public class MessageTileEntityPipe implements IMessage, IMessageHandler<MessageTileEntityPipe, IMessage> {
@@ -22,7 +20,6 @@ public class MessageTileEntityPipe implements IMessage, IMessageHandler<MessageT
         this.x = tileEntity.xCoord;
         this.y = tileEntity.yCoord;
         this.z = tileEntity.zCoord;
-        this.stored = tileEntity.tank.getFluidAmount();
     }
 
     @Override
@@ -30,7 +27,6 @@ public class MessageTileEntityPipe implements IMessage, IMessageHandler<MessageT
         this.x = buf.readInt();
         this.y = buf.readInt();
         this.z = buf.readInt();
-        this.stored = buf.readInt();
     }
 
     @Override
@@ -38,7 +34,6 @@ public class MessageTileEntityPipe implements IMessage, IMessageHandler<MessageT
         buf.writeInt(x);
         buf.writeInt(y);
         buf.writeInt(z);
-        buf.writeInt(stored);
     }
 
     @Override
@@ -46,8 +41,6 @@ public class MessageTileEntityPipe implements IMessage, IMessageHandler<MessageT
         TileEntity tileEntity = FMLClientHandler.instance().getClient().theWorld.getTileEntity(message.x, message.y, message.z);
 
         if (tileEntity instanceof TileEntityPipe) {
-            ((TileEntityPipe) tileEntity).stored = message.stored;
-            ((TileEntityPipe) tileEntity).tank.setFluid(new FluidStack(ZFluids.liquidZechorium, message.stored));
         }
 
         return null;

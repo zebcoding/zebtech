@@ -41,11 +41,13 @@ public class TileEntityRenderTankItem implements IItemRenderer {
     @Override
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
         GL11.glDisable(GL11.GL_LIGHTING);
+        GL11.glTranslatef(0.0F, -0.1F, 0.0F);
         Minecraft.getMinecraft().getTextureManager().bindTexture(t);
 
         drawTankSide();
         drawTankTop();
 
+        GL11.glTranslatef(0.0F, 0.1F, 0.0F);
         GL11.glEnable(GL11.GL_LIGHTING);
     }
 
@@ -79,29 +81,6 @@ public class TileEntityRenderTankItem implements IItemRenderer {
             tes.addVertexWithUV(l, h, l, 0, 1);
             tes.addVertexWithUV(l, l, l, 0, 0);
         }
-
-        //Inside
-        {
-            tes.addVertexWithUV(h, l, l, 1, 0);
-            tes.addVertexWithUV(h, h, l, 1, 1);
-            tes.addVertexWithUV(l, h, l, 0, 1);
-            tes.addVertexWithUV(l, l, l, 0, 0);
-
-            tes.addVertexWithUV(h, l, h, 1, 0);
-            tes.addVertexWithUV(h, h, h, 1, 1);
-            tes.addVertexWithUV(h, h, l, 0, 1);
-            tes.addVertexWithUV(h, l, l, 0, 0);
-
-            tes.addVertexWithUV(l, l, h, 0, 0);
-            tes.addVertexWithUV(l, h, h, 0, 1);
-            tes.addVertexWithUV(h, h, h, 1, 1);
-            tes.addVertexWithUV(h, l, h, 1, 0);
-
-            tes.addVertexWithUV(l, l, l, 0, 0);
-            tes.addVertexWithUV(l, h, l, 0, 1);
-            tes.addVertexWithUV(l, h, h, 1, 1);
-            tes.addVertexWithUV(l, l, h, 1, 0);
-        }
         tes.draw();
     }
 
@@ -124,19 +103,6 @@ public class TileEntityRenderTankItem implements IItemRenderer {
             tes.addVertexWithUV(h, l, h, 1, 1);
             tes.addVertexWithUV(l, l, h, 0, 1);
             tes.addVertexWithUV(l, l, l, 0, 0);
-        }
-
-        //Inside
-        {
-            tes.addVertexWithUV(h, h, l, 1, 0);
-            tes.addVertexWithUV(h, h, h, 1, 1);
-            tes.addVertexWithUV(l, h, h, 0, 1);
-            tes.addVertexWithUV(l, h, l, 0, 0);
-
-            tes.addVertexWithUV(l, l, l, 0, 0);
-            tes.addVertexWithUV(l, l, h, 0, 1);
-            tes.addVertexWithUV(h, l, h, 1, 1);
-            tes.addVertexWithUV(h, l, l, 1, 0);
         }
         tes.draw();
     }
