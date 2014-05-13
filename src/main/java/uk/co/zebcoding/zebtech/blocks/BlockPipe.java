@@ -14,6 +14,7 @@ public class BlockPipe extends BlockContainer {
         super(Material.ground);
         setBlockName("blockPipe");
         setCreativeTab(ZebTab.tabZeb);
+        setHarvestLevel("pickaxe", 1);
 
         float p = 1.0F / 16.0F;
         setBlockBounds(0 + 11 * p / 2, 0 + 11 * p / 2, 0 + 11 * p / 2, 1 - 11 * p / 2, 1 - 11 * p / 2, 1 - 11 * p / 2);

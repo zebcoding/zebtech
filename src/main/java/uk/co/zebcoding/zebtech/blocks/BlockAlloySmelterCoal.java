@@ -36,6 +36,7 @@ public class BlockAlloySmelterCoal extends BlockContainer {
         super(Material.rock);
 
         this.isActive = isActive;
+        setHarvestLevel("pickaxe", 1);
 
         if (this.isActive) {
             setBlockName("alloyFurnaceCoalActive");
@@ -65,7 +66,7 @@ public class BlockAlloySmelterCoal extends BlockContainer {
                 : (side != meta ? this.blockIcon : this.iconFront)));
     }
 
-    public Item getItemDropped(World world, int x, int y, int z) {
+    public Item getItemDropped(int i, Random r, int j) {
         return Item.getItemFromBlock(ZBlocks.alloySmelterCoalIdle);
     }
 

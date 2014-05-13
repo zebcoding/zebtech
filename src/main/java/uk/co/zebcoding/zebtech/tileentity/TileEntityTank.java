@@ -4,15 +4,17 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.Packet;
+import uk.co.zebcoding.zebtech.blocks.BlockTank;
 import uk.co.zebcoding.zebtech.network.PacketHandler;
 import uk.co.zebcoding.zebtech.network.message.MessageTileEntityTank;
 
 public class TileEntityTank extends TileEntityUsesZechorium {
 
     public int stored;
+    BlockTank block;
 
     public TileEntityTank() {
-        super(10000);
+        super(20000);
     }
 
     public void readFromNBT(NBTTagCompound tagCompound) {
@@ -50,6 +52,10 @@ public class TileEntityTank extends TileEntityUsesZechorium {
                 worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
             }
         }
+
+        if (block == null)
+            block = (BlockTank) worldObj.getBlock(xCoord, yCoord, zCoord);
+        block.stored = stored;
     }
 
     @Override

@@ -32,6 +32,7 @@ public class BlockRockPummelerBasic extends BlockContainer {
         super(Material.rock);
 
         this.isActive = isActive;
+        setHarvestLevel("pickaxe", 1);
 
         if (this.isActive) {
             setBlockName("rockPummelerBasicActive");
@@ -104,7 +105,7 @@ public class BlockRockPummelerBasic extends BlockContainer {
         return meta == 0 && side == 3 ? this.iconFront : (side != meta ? this.blockIcon : this.iconFront);
     }
 
-    public Item getItemDropped(World world, int x, int y, int z) {
+    public Item getItemDropped(int i, Random r, int j) {
         return Item.getItemFromBlock(ZBlocks.rockPummelerBasicIdle);
     }
 
