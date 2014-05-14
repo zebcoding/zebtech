@@ -22,7 +22,7 @@ import uk.co.zebcoding.zebtech.proxy.ZCommonProxy;
 import uk.co.zebcoding.zebtech.tileentity.ZTileEntity;
 import uk.co.zebcoding.zebtech.worldgen.ZebTechWorldGen;
 
-@Mod(modid = Reference.MODID, version = Reference.VERSION)
+@Mod(modid = Reference.MODID, version = Reference.VERSION, name = Reference.NAME)
 public class ZebTech {
 
     @Instance(Reference.MODID)
