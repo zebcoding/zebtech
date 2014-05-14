@@ -10,7 +10,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import uk.co.zebcoding.zebtech.blocks.ZBlocks;
-import uk.co.zebcoding.zebtech.crafting.Recipes;
+import uk.co.zebcoding.zebtech.crafting.ZRecipes;
 import uk.co.zebcoding.zebtech.creative.ZebTab;
 import uk.co.zebcoding.zebtech.fluids.ZFluids;
 import uk.co.zebcoding.zebtech.handler.CraftingHandler;
@@ -52,6 +52,6 @@ public class ZebTech {
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, zebProxy);
 
         ZTileEntity.init();
-        Recipes.init();
+        ZRecipes.init();
     }
 }

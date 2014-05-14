@@ -8,15 +8,15 @@ import net.minecraftforge.oredict.OreDictionary;
 import uk.co.zebcoding.zebtech.blocks.ZBlocks;
 import uk.co.zebcoding.zebtech.items.ZItems;
 
-public class Recipes {
+public class ZRecipes {
     public static void init() {
         // Crafting
         GameRegistry.addRecipe(new ItemStack(ZBlocks.tinBlock),
-                new Object[]{"TTT", "TTT", "TTT", 'T', ZItems.tinIngot});
+                new Object[]{"TTT", "TTT", "TTT", 'T', "tinIngot"});
         GameRegistry.addRecipe(new ItemStack(ZBlocks.leadBlock),
-                new Object[]{"LLL", "LLL", "LLL", 'L', ZItems.leadIngot});
+                new Object[]{"LLL", "LLL", "LLL", 'L', "leadIngot"});
         GameRegistry.addRecipe(new ItemStack(ZBlocks.copperBlock),
-                new Object[]{"CCC", "CCC", "CCC", 'C', ZItems.copperIngot});
+                new Object[]{"CCC", "CCC", "CCC", 'C', "copperIngot"});
         GameRegistry.addRecipe(new ItemStack(ZItems.ironHammerHead),
                 new Object[]{"II", " I", 'I', Items.iron_ingot});
         GameRegistry.addRecipe(new ItemStack(ZItems.ironHammer),
@@ -26,7 +26,7 @@ public class Recipes {
         GameRegistry.addRecipe(new ItemStack(ZItems.pcbBlank, 8),
                 new Object[]{"SSS", "SGS", "SSS", 'S', ZItems.stoneBoard, 'G', new ItemStack(Items.dye, 1, 2)});
         GameRegistry.addRecipe(new ItemStack(ZItems.solderingIron),
-                new Object[]{"C  ", "BC ", "  I", 'C', ZItems.copperIngot, 'B', Items.coal, 'I', Items.iron_ingot});
+                new Object[]{"C  ", "BC ", "  I", 'C', "copperIngot", 'B', Items.coal, 'I', Items.iron_ingot});
         GameRegistry.addRecipe(new ItemStack(ZBlocks.alloySmelterCoalIdle),
                 new Object[]{"CFC", "CCC", 'C', Blocks.cobblestone, 'F', Blocks.furnace});
         GameRegistry.addRecipe(new ItemStack(ZBlocks.alloySmelterBasicIdle),
@@ -34,11 +34,11 @@ public class Recipes {
                         'P', ZItems.pcbBasic});
 
         GameRegistry.addShapelessRecipe(new ItemStack(ZItems.tinIngot, 9),
-                new Object[]{ZBlocks.tinBlock});
+                new Object[]{"tinBlock"});
         GameRegistry.addShapelessRecipe(new ItemStack(ZItems.leadIngot, 9),
-                new Object[]{ZBlocks.leadBlock});
+                new Object[]{"leadBlock"});
         GameRegistry.addShapelessRecipe(new ItemStack(ZItems.copperIngot, 9),
-                new Object[]{ZBlocks.copperBlock});
+                new Object[]{"copperBlock"});
 
         GameRegistry.addShapelessRecipe(new ItemStack(ZItems.solderWire),
                 new Object[]{new ItemStack(ZItems.ironHammer, 1, OreDictionary.WILDCARD_VALUE), ZItems.solderLump});
@@ -49,7 +49,7 @@ public class Recipes {
         GameRegistry.addRecipe(new ItemStack(ZItems.pcbBasic),
                 new Object[]{"IS ", "CCC", " P ", 'I', new ItemStack(ZItems.solderingIron, 1, OreDictionary.WILDCARD_VALUE),
                         'S', new ItemStack(ZItems.solderWire, 1, OreDictionary.WILDCARD_VALUE),
-                        'C', ZItems.copperWire, 'P', ZItems.pcbBlank});
+                        'C', "copperWire", 'P', ZItems.pcbBlank});
 
         // Smelting
         GameRegistry.addSmelting(ZBlocks.tinOre,
