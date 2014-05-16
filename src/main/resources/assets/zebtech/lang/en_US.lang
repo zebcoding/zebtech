@@ -5,6 +5,7 @@ tile.zechoriumOre.name=Zechorium Ore
 tile.tinBlock.name=Tin Block
 tile.leadBlock.name=Lead Block
 tile.copperBlock.name=Copper Block
+tile.infusedIronBlock.name=Infused Iron Block
 tile.alloyFurnaceCoalActive.name=Alloy Furnace (Stone)
 tile.alloyFurnaceCoalIdle.name=Alloy Furnace (Stone)
 tile.alloyFurnaceBasicActive.name=Alloy Furnace (Basic)

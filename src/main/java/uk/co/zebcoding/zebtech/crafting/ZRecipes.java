@@ -45,6 +45,8 @@ public class ZRecipes {
                 new Object[]{ZBlocks.leadBlock});
         GameRegistry.addShapelessRecipe(new ItemStack(ZItems.copperIngot, 9),
                 new Object[]{ZBlocks.copperBlock});
+        GameRegistry.addShapelessRecipe(new ItemStack(ZItems.infusedIngot, 9),
+                new Object[]{ZBlocks.infusedIronBlock});
 
         GameRegistry.addShapelessRecipe(new ItemStack(ZItems.solderWire),
                 new Object[]{new ItemStack(ZItems.ironHammer, 1, OreDictionary.WILDCARD_VALUE), ZItems.solderLump});

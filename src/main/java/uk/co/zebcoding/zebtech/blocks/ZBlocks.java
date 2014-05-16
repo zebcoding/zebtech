@@ -25,6 +25,7 @@ public class ZBlocks {
     public static Block zechoriumExciterActive;
     public static Block zechoriumInfuserIdle;
     public static Block zechoriumInfuserActive;
+    public static Block infusedIronBlock;
     public static Block pipe;
     public static Block tank;
 
@@ -43,6 +44,7 @@ public class ZBlocks {
                 tinBlock = new BlockTin(),
                 leadBlock = new BlockLead(),
                 copperBlock = new BlockCopper(),
+                infusedIronBlock = new BlockInfusedIron(),
                 liquidZechorium = new BlockLiquidZechorium(),
                 alloySmelterCoalIdle = new BlockAlloySmelterCoal(false).setHardness(3.5F).setResistance(10.0F),
                 alloySmelterCoalActive = new BlockAlloySmelterCoal(true).setHardness(3.5F).setResistance(10.0F),
