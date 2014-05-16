@@ -1,0 +1,16 @@
+[
+{
+  "modid": "zebtech",
+  "name": "ZebTech",
+  "description": "ZebTech is a new Minecraft tech mod.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["The ZebCoding Team", "MckenzieSkullKid", "Zebington"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

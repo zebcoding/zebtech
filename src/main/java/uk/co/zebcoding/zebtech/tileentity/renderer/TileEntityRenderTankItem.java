@@ -51,12 +51,12 @@ public class TileEntityRenderTankItem implements IItemRenderer {
 
         drawTankSide();
         drawTankTop();
-        float i1 = item.getItemDamage() / 20000.0F;
+        float i1 = item.getItemDamage() / 10000.0F;
         if (i1 > 0)
             drawFluid(i1);
 
         GL11.glTranslatef(0.0F, 0.1F, 0.0F);
-        GL11.glEnable(GL11.GL_LIGHTING);
+        //GL11.glEnable(GL11.GL_LIGHTING);
     }
 
     /**

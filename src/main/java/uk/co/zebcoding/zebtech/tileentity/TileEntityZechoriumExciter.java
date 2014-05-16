@@ -23,7 +23,7 @@ import uk.co.zebcoding.zebtech.network.PacketHandler;
 import uk.co.zebcoding.zebtech.network.message.MessageTileEntityZechoriumExciter;
 
 public class TileEntityZechoriumExciter extends TileEntityProvidesZechorium implements
-ISidedInventory {
+        ISidedInventory {
 
     private static final int[] slotsTop = new int[]{0};
     private static final int[] slotsBottom = new int[]{2, 1};
@@ -442,24 +442,6 @@ ISidedInventory {
                 consumer.tank.fill(new FluidStack(ZFluids.liquidZechorium, canDrain), true);
             }
         }
-    }
-
-    private int getOppSide(int i) {
-        switch (i) {
-            case (0):
-                return 1;
-            case (1):
-                return 0;
-            case (2):
-                return 4;
-            case (3):
-                return 5;
-            case (4):
-                return 2;
-            case (5):
-                return 3;
-        }
-        return 10;
     }
 
     @Override

@@ -66,15 +66,15 @@ public class TileEntityRenderTank extends TileEntitySpecialRenderer {
 
         //Outside
         {
-            tes.addVertexWithUV(l, l, l, 0, 0);
-            tes.addVertexWithUV(l, h, l, 0, 1);
-            tes.addVertexWithUV(h, h, l, 1, 1);
-            tes.addVertexWithUV(h, l, l, 1, 0);
-
-            tes.addVertexWithUV(h, l, l, 0, 0);
+            tes.addVertexWithUV(l, l, l, 1, 0);
+            tes.addVertexWithUV(l, h, l, 1, 1);
             tes.addVertexWithUV(h, h, l, 0, 1);
-            tes.addVertexWithUV(h, h, h, 1, 1);
-            tes.addVertexWithUV(h, l, h, 1, 0);
+            tes.addVertexWithUV(h, l, l, 0, 0);
+
+            tes.addVertexWithUV(h, l, l, 1, 0);
+            tes.addVertexWithUV(h, h, l, 1, 1);
+            tes.addVertexWithUV(h, h, h, 0, 1);
+            tes.addVertexWithUV(h, l, h, 0, 0);
 
             tes.addVertexWithUV(h, l, h, 1, 0);
             tes.addVertexWithUV(h, h, h, 1, 1);

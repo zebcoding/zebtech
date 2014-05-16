@@ -11,6 +11,7 @@ public class TileEntityPipe extends TileEntityProvidesZechorium {
      * Machine connections, UP, DOWN, NORTH, EAST, SOUTH, WEST.
      */
     public ForgeDirection[] mc = new ForgeDirection[6];
+
     /**
      * The pipes storage.
      */

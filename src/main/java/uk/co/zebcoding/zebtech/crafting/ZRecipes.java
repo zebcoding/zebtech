@@ -33,9 +33,9 @@ public class ZRecipes {
                 new Object[]{"III", "IAI", " P ", 'I', Items.iron_ingot, 'A', ZBlocks.alloySmelterCoalIdle,
                         'P', ZItems.pcbBasic});
         GameRegistry.addRecipe(new ItemStack(ZBlocks.rockPummelerBasicIdle),
-                new Object[]{"IHI", "IFI", " P ", 'I', Items.iron_ingot, 'H', ZItems.ironHammer, 'P', ZItems.pcbBasic});
+                new Object[]{"IHI", "IFI", " P ", 'I', Items.iron_ingot, 'H', ZItems.ironHammer, 'F', Blocks.furnace, 'P', ZItems.pcbBasic});
         GameRegistry.addRecipe(new ItemStack(ZBlocks.zechoriumExciterIdle),
-                new Object[]{"IZI", "IFI", " P ", 'I', Items.iron_ingot, 'Z', ZItems.zechoriumCrystal, 'P', ZItems.pcbBasic});
+                new Object[]{"IZI", "IFI", " P ", 'I', Items.iron_ingot, 'Z', ZItems.zechoriumCrystal, 'F', Blocks.furnace, 'P', ZItems.pcbBasic});
         GameRegistry.addRecipe(new ItemStack(ZBlocks.zechoriumInfuserIdle),
                 new Object[]{"ZFZ", "IPI", 'Z', ZItems.zechoriumCrystal, 'F', Blocks.furnace, 'I', Items.iron_ingot, 'P', ZItems.pcbBasic});
 

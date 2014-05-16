@@ -1,11 +1,10 @@
 package uk.co.zebcoding.zebtech.tileentity;
 
-import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import uk.co.zebcoding.zebtech.fluids.ZFluids;
 
-public class TileEntityUsesZechorium extends TileEntity {
+public class TileEntityUsesZechorium extends TileEntityProvidesZechorium {
     public FluidTank tank;
 
     public TileEntityUsesZechorium() {

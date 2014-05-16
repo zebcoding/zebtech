@@ -5,6 +5,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import org.lwjgl.Sys;
+
+import java.util.List;
 
 public class ItemBlockTank extends ItemBlock {
 
@@ -33,5 +36,11 @@ public class ItemBlockTank extends ItemBlock {
         }
 
         return true;
+    }
+
+    @Override
+    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
+        par3List.add("Currently holding:");
+        par3List.add(getDamage(par1ItemStack) + " / 10000 mB");
     }
 }

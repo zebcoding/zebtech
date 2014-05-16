@@ -17,30 +17,32 @@ import net.minecraft.world.World;
 import uk.co.zebcoding.zebtech.ZebTech;
 import uk.co.zebcoding.zebtech.creative.ZebTab;
 import uk.co.zebcoding.zebtech.help.Reference;
-import uk.co.zebcoding.zebtech.tileentity.TileEntityAlloySmelterBasic;
+import uk.co.zebcoding.zebtech.tileentity.TileEntityZechoriumInfuser;
 
 import java.util.Random;
 
-public class BlockAlloySmelterBasic extends BlockContainer {
+public class ZMachine extends BlockContainer {
 
     private final boolean isActive;
 
     @SideOnly(Side.CLIENT)
-    private IIcon iconFront;
+    protected IIcon iconFront;
+    @SideOnly(Side.CLIENT)
+    protected IIcon iconSide;
 
     public static boolean keepInventory;
 
-    public BlockAlloySmelterBasic(boolean isActive) {
+    public ZMachine(boolean isActive, String machineName) {
         super(Material.rock);
 
         this.isActive = isActive;
         setHarvestLevel("pickaxe", 1);
 
         if (this.isActive) {
-            setBlockName("alloyFurnaceBasicActive");
+            setBlockName(machineName);
             setLightLevel(0.625F);
         } else {
-            setBlockName("alloyFurnaceBasicIdle");
+            setBlockName(machineName);
             setCreativeTab(ZebTab.tabZeb);
         }
     }
@@ -48,21 +50,20 @@ public class BlockAlloySmelterBasic extends BlockContainer {
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconRegister) {
         this.blockIcon = iconRegister.registerIcon(Reference.MODID + ":"
-                + "basicMachineSide");
-        this.iconFront = iconRegister.registerIcon(Reference.MODID
-                + ":"
-                + (this.isActive ? "alloySmelterBasicFrontActive"
-                : "alloySmelterBasicFrontIdle"));
+                + "advancedMachineSide");
+        this.iconFront = iconRegister.registerIcon(Reference.MODID + ":"
+                + (this.isActive ? "zechoriumInfuserFrontActive"
+                : "zechoriumInfuserFrontIdle"));
 
     }
 
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(int side, int meta) {
-        return meta == 0 && side == 3 ? this.iconFront : side != meta ? this.blockIcon : this.iconFront;
+        return meta == 0 && side == 3 ? this.iconFront : (side != meta ? this.blockIcon : this.iconFront);
     }
 
     public Item getItemDropped(int i, Random r, int j) {
-        return Item.getItemFromBlock(ZBlocks.alloySmelterBasicIdle);
+        return Item.getItemFromBlock(ZBlocks.zechoriumInfuserIdle);
     }
 
     public void onBlockAdded(World world, int x, int y, int z) {
@@ -122,7 +123,7 @@ public class BlockAlloySmelterBasic extends BlockContainer {
         }
 
         if (itemstack.hasDisplayName()) {
-            ((TileEntityAlloySmelterBasic) world.getTileEntity(x, y, z))
+            ((TileEntityZechoriumInfuser) world.getTileEntity(x, y, z))
                     .furnaceName(itemstack.getDisplayName());
         }
     }
@@ -134,12 +135,12 @@ public class BlockAlloySmelterBasic extends BlockContainer {
         burning = true;
 
         if (burning) {
-            world.setBlock(x, y, z, ZBlocks.alloySmelterBasicActive);
+            world.setBlock(x, y, z, ZBlocks.zechoriumInfuserActive);
         } else {
-            world.setBlock(x, y, z, ZBlocks.alloySmelterBasicIdle);
+            world.setBlock(x, y, z, ZBlocks.zechoriumInfuserIdle);
         }
 
-
+        burning = false;
         world.setBlockMetadataWithNotify(x, y, z, direction, 2);
 
         if (tileentity != null) {
@@ -150,14 +151,14 @@ public class BlockAlloySmelterBasic extends BlockContainer {
 
     public boolean onBlockActivated(World world, int x, int y, int z,
                                     EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
-        player.openGui(ZebTech.instance, ZBlocks.guiIDAlloySmelterBasic, world,
+        player.openGui(ZebTech.instance, ZBlocks.guiIDZechoriumInfuser, world,
                 x, y, z);
         return true;
     }
 
     @Override
     public TileEntity createNewTileEntity(World var1, int var2) {
-        return new TileEntityAlloySmelterBasic();
+        return new TileEntityZechoriumInfuser();
     }
 
     @SideOnly(Side.CLIENT)
@@ -171,23 +172,19 @@ public class BlockAlloySmelterBasic extends BlockContainer {
             float f4 = p_149734_5_.nextFloat() * 0.6F - 0.3F;
 
             if (l == 4) {
-                p_149734_1_.spawnParticle("smoke", (double) (f - f3), (double) f1, (double) (f2 + f4), 0.0D, 0.0D, 0.0D);
-                p_149734_1_.spawnParticle("flame", (double) (f - f3), (double) f1, (double) (f2 + f4), 0.0D, 0.0D, 0.0D);
+                p_149734_1_.spawnParticle("portal", (double) (f - f3), (double) f1, (double) (f2 + f4), 0.0D, 0.0D, 0.0D);
             } else if (l == 5) {
-                p_149734_1_.spawnParticle("smoke", (double) (f + f3), (double) f1, (double) (f2 + f4), 0.0D, 0.0D, 0.0D);
-                p_149734_1_.spawnParticle("flame", (double) (f + f3), (double) f1, (double) (f2 + f4), 0.0D, 0.0D, 0.0D);
+                p_149734_1_.spawnParticle("portal", (double) (f + f3), (double) f1, (double) (f2 + f4), 0.0D, 0.0D, 0.0D);
             } else if (l == 2) {
-                p_149734_1_.spawnParticle("smoke", (double) (f + f4), (double) f1, (double) (f2 - f3), 0.0D, 0.0D, 0.0D);
-                p_149734_1_.spawnParticle("flame", (double) (f + f4), (double) f1, (double) (f2 - f3), 0.0D, 0.0D, 0.0D);
+                p_149734_1_.spawnParticle("portal", (double) (f + f4), (double) f1, (double) (f2 - f3), 0.0D, 0.0D, 0.0D);
             } else if (l == 3) {
-                p_149734_1_.spawnParticle("smoke", (double) (f + f4), (double) f1, (double) (f2 + f3), 0.0D, 0.0D, 0.0D);
-                p_149734_1_.spawnParticle("flame", (double) (f + f4), (double) f1, (double) (f2 + f3), 0.0D, 0.0D, 0.0D);
+                p_149734_1_.spawnParticle("portal", (double) (f + f4), (double) f1, (double) (f2 + f3), 0.0D, 0.0D, 0.0D);
             }
         }
     }
 
-    public static void updateAlloySmelterBasicBlockState(boolean active,
-                                                         World worldObj, int xCoord, int yCoord, int zCoord) {
+    public static void updateZechoriumInfuserBlockState(boolean active,
+                                                        World worldObj, int xCoord, int yCoord, int zCoord) {
         int i = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
 
         TileEntity tileentity = worldObj.getTileEntity(xCoord, yCoord, zCoord);
@@ -196,10 +193,10 @@ public class BlockAlloySmelterBasic extends BlockContainer {
 
         if (active)
             worldObj.setBlock(xCoord, yCoord, zCoord,
-                    ZBlocks.alloySmelterBasicActive);
+                    ZBlocks.zechoriumInfuserActive);
         else
             worldObj.setBlock(xCoord, yCoord, zCoord,
-                    ZBlocks.alloySmelterBasicIdle);
+                    ZBlocks.zechoriumInfuserIdle);
 
         keepInventory = false;
 
@@ -213,6 +210,6 @@ public class BlockAlloySmelterBasic extends BlockContainer {
 
     @SideOnly(Side.CLIENT)
     public Item getItem(World world, int x, int y, int z) {
-        return Item.getItemFromBlock(ZBlocks.alloySmelterBasicIdle);
+        return Item.getItemFromBlock(ZBlocks.zechoriumInfuserIdle);
     }
 }
