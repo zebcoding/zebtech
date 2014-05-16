@@ -39,10 +39,10 @@ public class BlockZechoriumCompressor extends BlockContainer{
         setHarvestLevel("pickaxe", 3);
 
         if (this.isActive) {
-            setBlockName("zechoriumActive");
+            setBlockName("zechoriumCompressorActive");
             setLightLevel(0.625F);
         } else {
-            setBlockName("zechoriumIdle");
+            setBlockName("zechoriumCompressorIdle");
             setCreativeTab(ZebTab.tabZeb);
         }
     }
