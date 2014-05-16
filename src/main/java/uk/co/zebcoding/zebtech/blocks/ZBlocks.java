@@ -25,6 +25,8 @@ public class ZBlocks {
     public static Block zechoriumExciterActive;
     public static Block zechoriumInfuserIdle;
     public static Block zechoriumInfuserActive;
+    public static Block zechoriumCompressorIdle;
+    public static Block zechoriumCompressorActive;
     public static Block infusedIronBlock;
     public static Block pipe;
     public static Block tank;
@@ -34,6 +36,7 @@ public class ZBlocks {
     public static final int guiIDRockPummelerBasic = 2;
     public static final int guiIDZechoriumExciter = 3;
     public static final int guiIDZechoriumInfuser = 4;
+    public static final int guiIDZechoriumCompressor = 5;
 
     public static void init() {
         final Block[] blocks = new Block[]{
@@ -56,6 +59,8 @@ public class ZBlocks {
                 zechoriumExciterActive = new BlockZechoriumExciter(true).setHardness(3.5F).setResistance(10.0F),
                 zechoriumInfuserIdle = new BlockZechoriumInfuser(false).setHardness(3.5F).setResistance(10.0F),
                 zechoriumInfuserActive = new BlockZechoriumInfuser(true).setHardness(3.5F).setResistance(10.0F),
+                zechoriumCompressorIdle = new BlockZechoriumCompressor(false).setHardness(3.5F).setResistance(10.0F),
+                zechoriumCompressorActive = new BlockZechoriumCompressor(true).setHardness(3.5F).setResistance(10.0F),
                 pipe = new BlockPipe().setHardness(1.5F).setResistance(10.0F),
         };
 

@@ -17,6 +17,8 @@ public class ZRecipes {
                 new Object[]{"LLL", "LLL", "LLL", 'L', ZItems.leadIngot});
         GameRegistry.addRecipe(new ItemStack(ZBlocks.copperBlock),
                 new Object[]{"CCC", "CCC", "CCC", 'C', ZItems.copperIngot});
+        GameRegistry.addRecipe(new ItemStack(ZBlocks.infusedIronBlock),
+                new Object[]{"III", "III", "III", 'I', ZItems.infusedIngot});
         GameRegistry.addRecipe(new ItemStack(ZItems.ironHammerHead),
                 new Object[]{"II", " I", 'I', Items.iron_ingot});
         GameRegistry.addRecipe(new ItemStack(ZItems.ironHammer),
