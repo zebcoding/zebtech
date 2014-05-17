@@ -15,6 +15,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.Packet;
 import uk.co.zebcoding.zebtech.blocks.BlockZechoriumCompressor;
 import uk.co.zebcoding.zebtech.blocks.BlockZechoriumInfuser;
+import uk.co.zebcoding.zebtech.blocks.ZBlocks;
 import uk.co.zebcoding.zebtech.crafting.ZechoriumCompressorRecipes;
 import uk.co.zebcoding.zebtech.crafting.ZechoriumInfuserRecipes;
 import uk.co.zebcoding.zebtech.network.PacketHandler;
@@ -222,8 +223,8 @@ public class TileEntityZechoriumCompressor extends TileEntityUsesZechorium imple
 
         if (flag != this.burnTime > 0) {
             flag1 = true;
-            BlockZechoriumCompressor.updateZechoriumCompressorBlockState(
-                    this.burnTime > 0, this.worldObj, this.xCoord, this.yCoord,
+            BlockZechoriumCompressor.updateBlockState(
+                    this.burnTime > 0 ? ZBlocks.zechoriumCompressorActive : ZBlocks.zechoriumCompressorIdle, this.worldObj, this.xCoord, this.yCoord,
                     this.zCoord);
         }
 

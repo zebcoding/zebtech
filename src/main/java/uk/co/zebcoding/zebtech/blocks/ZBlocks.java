@@ -50,6 +50,7 @@ public class ZBlocks {
                 tinBlock = new BlockTin(),
                 leadBlock = new BlockLead(),
                 copperBlock = new BlockCopper(),
+                infusedIronBlock = new BlockInfusedIron(),
                 liquidZechorium = new BlockLiquidZechorium(),
                 alloySmelterCoalIdle = new BlockAlloySmelterCoal(false).setHardness(3.5F).setResistance(10.0F),
                 alloySmelterCoalActive = new BlockAlloySmelterCoal(true).setHardness(3.5F).setResistance(10.0F),
@@ -61,6 +62,10 @@ public class ZBlocks {
                 zechoriumExciterActive = new BlockZechoriumExciter(true).setHardness(3.5F).setResistance(10.0F),
                 zechoriumInfuserIdle = new BlockZechoriumInfuser(false).setHardness(3.5F).setResistance(10.0F),
                 zechoriumInfuserActive = new BlockZechoriumInfuser(true).setHardness(3.5F).setResistance(10.0F),
+                zechoriumCompressorIdle = new BlockZechoriumCompressor(false).setHardness(3.5F).setResistance(10.0F),
+                zechoriumCompressorActive = new BlockZechoriumCompressor(true).setHardness(3.5F).setResistance(10.0F),
+                zechoriumFurnaceIdle = new BlockZechoriumFurnace(false),
+                zechoriumFurnaceActive = new BlockZechoriumFurnace(true),
                 pipe = new BlockPipe().setHardness(1.5F).setResistance(10.0F),
         };
 

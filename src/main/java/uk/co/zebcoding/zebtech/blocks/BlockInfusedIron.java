@@ -13,6 +13,7 @@ public class BlockInfusedIron extends Block{
         setBlockTextureName(Reference.MODID + ":"
                 + getUnlocalizedName().substring(5));
         setCreativeTab(ZebTab.tabZeb);
+        setLightLevel(8.0F);
         setHardness(3.0F);
         setResistance(5.0F);
     }
