@@ -49,6 +49,12 @@ public class ZClientProxy extends ZCommonProxy {
                         return new GuiZechoriumInfuser(player.inventory,
                                 (TileEntityZechoriumInfuser) entity);
                     }
+                case ZBlocks.guiIDZechoriumCompressor:
+                    if (entity instanceof TileEntityZechoriumCompressor) {
+                        System.out.println("YLO");
+                        return new GuiZechoriumCompressor(player.inventory,
+                                (TileEntityZechoriumCompressor) entity);
+                    }
             }
         }
         return null;

@@ -17,9 +17,7 @@ import net.minecraft.world.World;
 import uk.co.zebcoding.zebtech.ZebTech;
 import uk.co.zebcoding.zebtech.creative.ZebTab;
 import uk.co.zebcoding.zebtech.help.Reference;
-import uk.co.zebcoding.zebtech.tileentity.TileEntityAlloySmelterBasic;
 import uk.co.zebcoding.zebtech.tileentity.TileEntityZechoriumCompressor;
-import uk.co.zebcoding.zebtech.tileentity.TileEntityZechoriumInfuser;
 
 import java.util.Random;
 
@@ -159,7 +157,7 @@ public class BlockZechoriumCompressor extends BlockContainer{
 
     @Override
     public TileEntity createNewTileEntity(World var1, int var2) {
-        return new TileEntityZechoriumInfuser();
+        return new TileEntityZechoriumCompressor();
     }
 
     @SideOnly(Side.CLIENT)
