@@ -15,6 +15,7 @@ public class PacketHandler {
         INSTANCE.registerMessage(MessageTileEntityPipe.class, MessageTileEntityPipe.class, 1, Side.CLIENT);
         INSTANCE.registerMessage(MessageTileEntityZechoriumInfuser.class, MessageTileEntityZechoriumInfuser.class, 2, Side.CLIENT);
         INSTANCE.registerMessage(MessageTileEntityTank.class, MessageTileEntityTank.class, 3, Side.CLIENT);
-        INSTANCE.registerMessage(MessageTileEntityZechoriumCompressor.class, MessageTileEntityZechoriumCompressor.class, 3, Side.CLIENT);
+        INSTANCE.registerMessage(MessageTileEntityZechoriumFurnace.class, MessageTileEntityZechoriumFurnace.class, 4, Side.CLIENT);
+        INSTANCE.registerMessage(MessageTileEntityZechoriumCompressor.class, MessageTileEntityZechoriumCompressor.class, 5, Side.CLIENT);
     }
 }

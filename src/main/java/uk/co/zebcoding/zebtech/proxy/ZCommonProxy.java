@@ -49,6 +49,11 @@ public class ZCommonProxy implements IGuiHandler {
                         return new ContainerZechoriumInfuser(player.inventory,
                                 (TileEntityZechoriumInfuser) entity);
                     }
+                case ZBlocks.guiIDZechoriumFurnace:
+                    if (entity instanceof TileEntityZechoriumFurnace) {
+                        return new ContainerZechoriumFurnace(player.inventory,
+                                (TileEntityZechoriumFurnace) entity);
+                    }
                 case ZBlocks.guiIDZechoriumCompressor:
                     if (entity instanceof TileEntityZechoriumCompressor) {
                         return new ContainerZechoriumCompressor(player.inventory,

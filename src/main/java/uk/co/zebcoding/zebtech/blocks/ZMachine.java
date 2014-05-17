@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 import uk.co.zebcoding.zebtech.ZebTech;
 import uk.co.zebcoding.zebtech.creative.ZebTab;
 import uk.co.zebcoding.zebtech.help.Reference;
-import uk.co.zebcoding.zebtech.tileentity.TileEntityZechoriumInfuser;
+import uk.co.zebcoding.zebtech.tileentity.TileEntityZechoriumFurnace;
 
 import java.util.Random;
 
@@ -26,23 +26,36 @@ public class ZMachine extends BlockContainer {
     private final boolean isActive;
 
     @SideOnly(Side.CLIENT)
-    protected IIcon iconFront;
-    @SideOnly(Side.CLIENT)
-    protected IIcon iconSide;
+    private IIcon iconFront;
 
     public static boolean keepInventory;
 
-    public ZMachine(boolean isActive, String machineName) {
+    private int level;
+    private String machineName;
+    private Item item;
+    private Class<?extends TileEntity> te;
+    private int guiID;
+
+    public ZMachine(boolean isActive, String machineName, int level, Item item, Class<? extends TileEntity> te, int guiID) {
         super(Material.rock);
 
         this.isActive = isActive;
+        this.level = level;
+        this.machineName = machineName;
+        this.item = item;
+        this.te = te;
+        if (this.te != null) System.out.println(this.te);
+        this.guiID = guiID;
+
+        setHardness(3.5F);
+        setResistance(10.0F);
         setHarvestLevel("pickaxe", 1);
 
         if (this.isActive) {
-            setBlockName(machineName);
+            setBlockName(machineName + "Active");
             setLightLevel(0.625F);
         } else {
-            setBlockName(machineName);
+            setBlockName(machineName + "Idle");
             setCreativeTab(ZebTab.tabZeb);
         }
     }
@@ -50,10 +63,10 @@ public class ZMachine extends BlockContainer {
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconRegister) {
         this.blockIcon = iconRegister.registerIcon(Reference.MODID + ":"
-                + "advancedMachineSide");
+                + (level == 1 ? "basicMachineSide" : "advancedMachineSide"));
         this.iconFront = iconRegister.registerIcon(Reference.MODID + ":"
-                + (this.isActive ? "zechoriumInfuserFrontActive"
-                : "zechoriumInfuserFrontIdle"));
+                + (this.isActive ? machineName + "FrontActive"
+                : machineName + "FrontIdle"));
 
     }
 
@@ -63,7 +76,7 @@ public class ZMachine extends BlockContainer {
     }
 
     public Item getItemDropped(int i, Random r, int j) {
-        return Item.getItemFromBlock(ZBlocks.zechoriumInfuserIdle);
+        return item;
     }
 
     public void onBlockAdded(World world, int x, int y, int z) {
@@ -121,44 +134,24 @@ public class ZMachine extends BlockContainer {
         if (direction == 3) {
             world.setBlockMetadataWithNotify(x, y, z, 4, 2);
         }
-
-        if (itemstack.hasDisplayName()) {
-            ((TileEntityZechoriumInfuser) world.getTileEntity(x, y, z))
-                    .furnaceName(itemstack.getDisplayName());
-        }
-    }
-
-    public static void updateBlockState(boolean burning, World world, int x,
-                                        int y, int z) {
-        int direction = world.getBlockMetadata(x, y, z);
-        TileEntity tileentity = world.getTileEntity(x, y, z);
-        burning = true;
-
-        if (burning) {
-            world.setBlock(x, y, z, ZBlocks.zechoriumInfuserActive);
-        } else {
-            world.setBlock(x, y, z, ZBlocks.zechoriumInfuserIdle);
-        }
-
-        burning = false;
-        world.setBlockMetadataWithNotify(x, y, z, direction, 2);
-
-        if (tileentity != null) {
-            tileentity.validate();
-            world.setTileEntity(x, y, z, tileentity);
-        }
     }
 
     public boolean onBlockActivated(World world, int x, int y, int z,
                                     EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
-        player.openGui(ZebTech.instance, ZBlocks.guiIDZechoriumInfuser, world,
+        player.openGui(ZebTech.instance, guiID, world,
                 x, y, z);
         return true;
     }
 
     @Override
     public TileEntity createNewTileEntity(World var1, int var2) {
-        return new TileEntityZechoriumInfuser();
+        try {
+            final TileEntity entity = te.getConstructor(new Class[0]).newInstance();
+            return entity;
+        } catch (Exception exp) {
+            System.out.println("Tile entity creation failed: " + exp);
+            return null;
+        }
     }
 
     @SideOnly(Side.CLIENT)
@@ -183,33 +176,27 @@ public class ZMachine extends BlockContainer {
         }
     }
 
-    public static void updateZechoriumInfuserBlockState(boolean active,
-                                                        World worldObj, int xCoord, int yCoord, int zCoord) {
-        int i = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+    @SideOnly(Side.CLIENT)
+    public Item getItem(World world, int x, int y, int z) {
+        return item;
+    }
 
-        TileEntity tileentity = worldObj.getTileEntity(xCoord, yCoord, zCoord);
+    public static void updateBlockState(Block block, World worldObj, int x, int y, int z) {
+        int i = worldObj.getBlockMetadata(x, y, z);
+
+        TileEntity tileentity = worldObj.getTileEntity(x, y, z);
 
         keepInventory = true;
 
-        if (active)
-            worldObj.setBlock(xCoord, yCoord, zCoord,
-                    ZBlocks.zechoriumInfuserActive);
-        else
-            worldObj.setBlock(xCoord, yCoord, zCoord,
-                    ZBlocks.zechoriumInfuserIdle);
+        worldObj.setBlock(x, y, z, block);
 
         keepInventory = false;
 
-        worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, i, 2);
+        worldObj.setBlockMetadataWithNotify(x, y, z, i, 2);
 
         if (tileentity != null) {
             tileentity.validate();
-            worldObj.setTileEntity(xCoord, yCoord, zCoord, tileentity);
+            worldObj.setTileEntity(x, y, z, tileentity);
         }
-    }
-
-    @SideOnly(Side.CLIENT)
-    public Item getItem(World world, int x, int y, int z) {
-        return Item.getItemFromBlock(ZBlocks.zechoriumInfuserIdle);
     }
 }

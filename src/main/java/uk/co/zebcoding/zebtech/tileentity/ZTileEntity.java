@@ -11,6 +11,7 @@ public class ZTileEntity {
         GameRegistry.registerTileEntity(TileEntityRockPummelerBasic.class, "rockPummelerBasic");
         GameRegistry.registerTileEntity(TileEntityZechoriumExciter.class, "zechoriumExciter");
         GameRegistry.registerTileEntity(TileEntityZechoriumInfuser.class, "zechoriumInfuser");
+        GameRegistry.registerTileEntity(TileEntityZechoriumFurnace.class, "zechoriumFurnace");
         GameRegistry.registerTileEntity(TileEntityZechoriumCompressor.class, Reference.MODID + ":" + "zechoriumCompressor");
         GameRegistry.registerTileEntity(TileEntityPipe.class, "pipe");
         GameRegistry.registerTileEntity(TileEntityTank.class, "tank");

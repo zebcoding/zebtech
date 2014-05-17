@@ -14,6 +14,7 @@ public class ZBlocks {
     public static Block tinBlock;
     public static Block leadBlock;
     public static Block copperBlock;
+    public static Block infusedIronBlock;
     public static Block liquidZechorium;
     public static Block alloySmelterCoalIdle;
     public static Block alloySmelterCoalActive;
@@ -25,9 +26,10 @@ public class ZBlocks {
     public static Block zechoriumExciterActive;
     public static Block zechoriumInfuserIdle;
     public static Block zechoriumInfuserActive;
+    public static Block zechoriumFurnaceIdle;
+    public static Block zechoriumFurnaceActive;
     public static Block zechoriumCompressorIdle;
     public static Block zechoriumCompressorActive;
-    public static Block infusedIronBlock;
     public static Block pipe;
     public static Block tank;
 
@@ -37,6 +39,7 @@ public class ZBlocks {
     public static final int guiIDZechoriumExciter = 3;
     public static final int guiIDZechoriumInfuser = 4;
     public static final int guiIDZechoriumCompressor = 5;
+    public static final int guiIDZechoriumFurnace = 6;
 
     public static void init() {
         final Block[] blocks = new Block[]{
@@ -47,7 +50,6 @@ public class ZBlocks {
                 tinBlock = new BlockTin(),
                 leadBlock = new BlockLead(),
                 copperBlock = new BlockCopper(),
-                infusedIronBlock = new BlockInfusedIron(),
                 liquidZechorium = new BlockLiquidZechorium(),
                 alloySmelterCoalIdle = new BlockAlloySmelterCoal(false).setHardness(3.5F).setResistance(10.0F),
                 alloySmelterCoalActive = new BlockAlloySmelterCoal(true).setHardness(3.5F).setResistance(10.0F),
@@ -59,8 +61,6 @@ public class ZBlocks {
                 zechoriumExciterActive = new BlockZechoriumExciter(true).setHardness(3.5F).setResistance(10.0F),
                 zechoriumInfuserIdle = new BlockZechoriumInfuser(false).setHardness(3.5F).setResistance(10.0F),
                 zechoriumInfuserActive = new BlockZechoriumInfuser(true).setHardness(3.5F).setResistance(10.0F),
-                zechoriumCompressorIdle = new BlockZechoriumCompressor(false).setHardness(3.5F).setResistance(10.0F),
-                zechoriumCompressorActive = new BlockZechoriumCompressor(true).setHardness(3.5F).setResistance(10.0F),
                 pipe = new BlockPipe().setHardness(1.5F).setResistance(10.0F),
         };
 
