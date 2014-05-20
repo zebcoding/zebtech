@@ -22,7 +22,7 @@ import uk.co.zebcoding.zebtech.tileentity.TileEntityZechoriumInfuser;
  */
 public class GuiZechoriumCompressor extends GuiContainer {
     public static final ResourceLocation bground = new ResourceLocation(
-            Reference.MODID + ":" + "textures/gui/GuiZechoriumInfuser.png");
+            Reference.MODID + ":" + "textures/gui/GuiZechoriumCompressor.png");
     private static final ResourceLocation BLOCK_TEXTURE = TextureMap.locationBlocksTexture;
 
     public TileEntityZechoriumCompressor zechoriumCompressor;
