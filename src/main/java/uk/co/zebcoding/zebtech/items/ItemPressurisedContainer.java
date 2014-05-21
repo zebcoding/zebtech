@@ -54,9 +54,11 @@ public class ItemPressurisedContainer extends Item {
                 if (x <= itemStack.stackTagCompound.getInteger("amount")) {
                     p.stackSize += x;
                     itemStack.stackTagCompound.setInteger("amount", itemStack.stackTagCompound.getInteger("amount") - x);
-                } else
+                } else {
+                    p.stackSize += itemStack.stackTagCompound.getInteger("amount");
+                    itemStack.stackTagCompound.setInteger("amount", 0);
+                }
 
-                itemStack.stackTagCompound.setInteger("amount", itemStack.stackTagCompound.getInteger("amount") - 1);
                 if (itemStack.stackTagCompound.getInteger("amount") == 0) {
                     itemStack.stackTagCompound.setInteger("item", 0);
                     itemStack.stackTagCompound.setInteger("metadata", 0);

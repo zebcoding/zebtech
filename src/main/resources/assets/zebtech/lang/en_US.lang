@@ -18,6 +18,8 @@ tile.zechoriumInfuserActive.name=Zechorium Infuser
 tile.zechoriumInfuserIdle.name=Zechorium Infuser
 tile.zechoriumCompressorActive.name=Zechorium Compressor
 tile.zechoriumCompressorIdle.name=Zechorium Compressor
+tile.zechoriumFurnaceActive.name=Zechorium Furnace
+tile.zechoriumFurnaceIdle.name=Zechorium Furnace
 tile.liquidZechorium.name=Liquid Zechorium
 tile.blockPipe.name=Zechorium Duct
 tile.blockTank.name=Zechorium Tank
@@ -39,5 +41,6 @@ item.solderingIron.name=Soldering Iron
 item.stoneBoard.name=Stone Board
 item.pcbBlank.name=PCB (Blank)
 item.pcbBasic.name=PCB (Basic)
+item.pressurisedContainer.name=Pressurised Container
 
 itemGroup.TabZeb=ZebTech

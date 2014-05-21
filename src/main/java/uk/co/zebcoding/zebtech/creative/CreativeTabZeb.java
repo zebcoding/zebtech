@@ -8,12 +8,11 @@ public class CreativeTabZeb extends CreativeTabs {
 
     public CreativeTabZeb(String label) {
         super(label);
-        // TODO Auto-generated constructor stub
     }
 
     @Override
     public Item getTabIconItem() {
-        return ZItems.solderWire;
+        return ZItems.zechoriumCrystal;
     }
 
 }
