@@ -1,7 +1,9 @@
 package uk.co.zebcoding.zebtech.items;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -32,13 +34,34 @@ public class ItemPressurisedContainer extends Item {
     }
 
     @Override
-    public void onUpdate (ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5) {
-        if (par1ItemStack.stackTagCompound == null) {
-            par1ItemStack.stackTagCompound = new NBTTagCompound();
+    public void onUpdate (ItemStack itemStack, World par2World, Entity par3Entity, int par4, boolean par5) {
+        if (itemStack.stackTagCompound == null) {
+            itemStack.stackTagCompound = new NBTTagCompound();
 
-            par1ItemStack.stackTagCompound.setInteger("item", 0);
-            par1ItemStack.stackTagCompound.setInteger("metadata", 0);
-            par1ItemStack.stackTagCompound.setInteger("amount", 0);
+            itemStack.stackTagCompound.setInteger("item", 0);
+            itemStack.stackTagCompound.setInteger("metadata", 0);
+            itemStack.stackTagCompound.setInteger("amount", 0);
+        }
+
+        if (par3Entity instanceof EntityPlayer) {
+            EntityPlayer player = (EntityPlayer) par3Entity;
+            ItemStack p = player.inventory.getCurrentItem();
+            ItemStack i = new ItemStack(getItemById(itemStack.stackTagCompound.getInteger("item")), 1,
+                    itemStack.stackTagCompound.getInteger("metadata"));
+            if (p != null && p.isItemEqual(i)) {
+                int x = p.getMaxStackSize() - p.stackSize;
+
+                if (x <= itemStack.stackTagCompound.getInteger("amount")) {
+                    p.stackSize += x;
+                    itemStack.stackTagCompound.setInteger("amount", itemStack.stackTagCompound.getInteger("amount") - x);
+                } else
+
+                itemStack.stackTagCompound.setInteger("amount", itemStack.stackTagCompound.getInteger("amount") - 1);
+                if (itemStack.stackTagCompound.getInteger("amount") == 0) {
+                    itemStack.stackTagCompound.setInteger("item", 0);
+                    itemStack.stackTagCompound.setInteger("metadata", 0);
+                }
+            }
         }
     }
 
