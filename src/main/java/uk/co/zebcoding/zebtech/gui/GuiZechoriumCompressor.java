@@ -7,12 +7,14 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Slot;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import uk.co.zebcoding.zebtech.blocks.ZBlocks;
 import uk.co.zebcoding.zebtech.container.ContainerZechoriumCompressor;
 import uk.co.zebcoding.zebtech.container.ContainerZechoriumInfuser;
+import uk.co.zebcoding.zebtech.container.SlotCompressor;
 import uk.co.zebcoding.zebtech.help.Reference;
 import uk.co.zebcoding.zebtech.tileentity.TileEntityZechoriumCompressor;
 import uk.co.zebcoding.zebtech.tileentity.TileEntityZechoriumInfuser;
@@ -35,6 +37,8 @@ public class GuiZechoriumCompressor extends GuiContainer {
         this.xSize = 176;
         this.ySize = 166;
     }
+
+    @Override
     public void drawGuiContainerForegroundLayer(int var1, int var2) {
         String name = this.zechoriumCompressor.hasCustomInventoryName() ? this.zechoriumCompressor
                 .getInventoryName() : I18n.format(
@@ -63,7 +67,6 @@ public class GuiZechoriumCompressor extends GuiContainer {
         this.drawTexturedModalRect(k + 79, l + 34, 176, 14, i1 + 1, 16);
 
         i1 = this.zechoriumCompressor.getLiquidLevelScaled(44);
-
         this.drawFluid(ZBlocks.liquidZechorium, i1, k + 27, l + 21, 16, 44);
     }
 

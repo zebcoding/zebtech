@@ -18,6 +18,7 @@ import uk.co.zebcoding.zebtech.blocks.BlockZechoriumInfuser;
 import uk.co.zebcoding.zebtech.blocks.ZBlocks;
 import uk.co.zebcoding.zebtech.crafting.ZechoriumCompressorRecipes;
 import uk.co.zebcoding.zebtech.crafting.ZechoriumInfuserRecipes;
+import uk.co.zebcoding.zebtech.items.ZItems;
 import uk.co.zebcoding.zebtech.network.PacketHandler;
 import uk.co.zebcoding.zebtech.network.message.MessageTileEntityZechoriumCompressor;
 import uk.co.zebcoding.zebtech.network.message.MessageTileEntityZechoriumInfuser;
@@ -98,7 +99,6 @@ public class TileEntityZechoriumCompressor extends TileEntityUsesZechorium imple
                 && itemstack.stackSize > this.getInventoryStackLimit()) {
             itemstack.stackSize = this.getInventoryStackLimit();
         }
-
     }
 
     @Override
@@ -114,7 +114,7 @@ public class TileEntityZechoriumCompressor extends TileEntityUsesZechorium imple
 
     @Override
     public int getInventoryStackLimit() {
-        return 64;
+        return 2048;
     }
 
     public void readFromNBT(NBTTagCompound tagCompound) {
@@ -176,7 +176,7 @@ public class TileEntityZechoriumCompressor extends TileEntityUsesZechorium imple
 
     @SideOnly(Side.CLIENT)
     public int getCookProgressScaled(int par1) {
-        return this.cookTime * par1 / 150;
+        return this.cookTime * par1 / 1;
     }
 
     @SideOnly(Side.CLIENT)
@@ -204,14 +204,14 @@ public class TileEntityZechoriumCompressor extends TileEntityUsesZechorium imple
             }
 
             if (this.burnTime == 0 && this.canSmelt()) {
-                if (this.tank.getFluidAmount() >= 250)
-                    this.currentItemBurnTime = this.burnTime = 150;
+                if (this.tank.getFluidAmount() >= 1)
+                    this.currentItemBurnTime = this.burnTime = 1;
             }
 
             if (this.isBurning() && this.canSmelt()) {
                 ++this.cookTime;
                 this.tank.drain(1, true);
-                if (this.cookTime == 150) {
+                if (this.cookTime == 1) {
                     this.cookTime = 0;
                     this.smeltItem();
                     flag1 = true;
@@ -238,36 +238,35 @@ public class TileEntityZechoriumCompressor extends TileEntityUsesZechorium imple
         if (this.furnaceItemStacks[0] == null) {
             return false;
         } else {
-            ItemStack itemstack = ZechoriumCompressorRecipes
-                    .getSmeltingResult(this.furnaceItemStacks[0]);
-            if (itemstack == null)
-                return false;
-            if (this.furnaceItemStacks[1] == null)
+            if(this.furnaceItemStacks[1] != null) {
+                if (this.furnaceItemStacks[1].getItem() != ZItems.pressurisedContainer) return false;
+                NBTTagCompound t = this.furnaceItemStacks[1].stackTagCompound;
+                if (t == null) return false;
+                if (t.getInteger("amount") == 2048) return false;
+                if (t.getInteger("item") != 0 && t.getInteger("metadata") != this.furnaceItemStacks[0].getItemDamage()) return false;
+                if (t.getInteger("item") == 0) return true;
+                if (Item.getItemById(t.getInteger("item")) != this.furnaceItemStacks[0].getItem()) return false;
                 return true;
-            if (!this.furnaceItemStacks[1].isItemEqual(itemstack))
-                return false;
-            int result = furnaceItemStacks[1].stackSize + itemstack.stackSize;
-            return result <= getInventoryStackLimit() && result <= this.furnaceItemStacks[1].getMaxStackSize();
+            }
+            return false;
         }
     }
 
     public void smeltItem() {
         if (this.canSmelt()) {
-            ItemStack itemstack = ZechoriumCompressorRecipes.getSmeltingResult(this.furnaceItemStacks[0]);
-
-            if (this.furnaceItemStacks[1] == null) {
-                this.furnaceItemStacks[1] = itemstack.copy();
-            } else if (this.furnaceItemStacks[1].isItemEqual(itemstack)) {
-                this.furnaceItemStacks[1].stackSize += itemstack.stackSize;
+            NBTTagCompound t = this.furnaceItemStacks[1].stackTagCompound;
+            if (t.getInteger("item") == 0) {
+                t.setInteger("item", Item.getIdFromItem(this.furnaceItemStacks[0].getItem()));
+                t.setInteger("metadata", this.furnaceItemStacks[0].getItemDamage());
             }
+
+            t.setInteger("amount", t.getInteger("amount") + 1);
 
             --this.furnaceItemStacks[0].stackSize;
 
-            if (this.furnaceItemStacks[0].stackSize <= 0) {
+            if (this.furnaceItemStacks[0].stackSize == 0) {
                 this.furnaceItemStacks[0] = null;
             }
-
-            this.tank.drain(100, true);
         }
     }
 

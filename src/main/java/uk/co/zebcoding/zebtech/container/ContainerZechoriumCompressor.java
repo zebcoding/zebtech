@@ -7,6 +7,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.*;
 import net.minecraft.item.ItemStack;
 import uk.co.zebcoding.zebtech.crafting.ZechoriumCompressorRecipes;
+import uk.co.zebcoding.zebtech.items.ZItems;
 import uk.co.zebcoding.zebtech.tileentity.TileEntityZechoriumCompressor;
 
 public class ContainerZechoriumCompressor extends Container{
@@ -26,9 +27,8 @@ public class ContainerZechoriumCompressor extends Container{
     public ContainerZechoriumCompressor(InventoryPlayer player,
                                      TileEntityZechoriumCompressor tileEntityFurnace) {
         this.zechoriumCompressor = tileEntityFurnace;
-        this.addSlotToContainer(new Slot(tileEntityFurnace, 0, 56, 24));
-        this.addSlotToContainer(new Slot(tileEntityFurnace, 1, 56, 45));
-        this.addSlotToContainer(new SlotFurnace(player.player, tileEntityFurnace, 2, 116, 35));
+        this.addSlotToContainer(new Slot(tileEntityFurnace, 0, 56, 35));
+        this.addSlotToContainer(new SlotCompressor(tileEntityFurnace, 1, 116, 35));
 
         for (int i = 0; i < 3; ++i) {
             for (int j = 0; j < 9; ++j) {
@@ -104,27 +104,21 @@ public class ContainerZechoriumCompressor extends Container{
             ItemStack itemstack1 = slot.getStack();
             itemstack = itemstack1.copy();
 
-            if (par2 == 2) {
-                if (!this.mergeItemStack(itemstack1, 3, 39, true)) {
+            if (par2 == 1) {
+                if (!this.mergeItemStack(itemstack1, 2, 38, true)) {
                     return null;
                 }
 
                 slot.onSlotChange(itemstack1, itemstack);
-            } else if (par2 != 1 && par2 != 0) {
-                if (ZechoriumCompressorRecipes.getSmeltingResult(itemstack1) != null) {
-                    if (!this.mergeItemStack(itemstack1, 0, 1, false)) {
-                        return null;
-                    }
-                } else if (TileEntityZechoriumCompressor.isItemFuel(itemstack1)) {
+            } else if (par2 != 0) {
+                if (itemstack.isItemEqual(new ItemStack(ZItems.pressurisedContainer))) {
                     if (!this.mergeItemStack(itemstack1, 1, 2, false)) {
                         return null;
                     }
-                } else if (par2 >= 2 && par2 < 29) {
-                    if (!this.mergeItemStack(itemstack1, 29, 38, false)) {
+                } else {
+                    if (!this.mergeItemStack(itemstack1, 0, 1, false)) {
                         return null;
                     }
-                } else if (par2 >= 29 && par2 < 38 && !this.mergeItemStack(itemstack1, 3, 30, false)) {
-                    return null;
                 }
             } else if (!this.mergeItemStack(itemstack1, 2, 38, false)) {
                 return null;
