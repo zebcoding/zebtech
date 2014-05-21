@@ -21,6 +21,7 @@ public class ZItems {
     public static Item stoneBoard;
     public static Item pcbBlank;
     public static Item pcbBasic;
+    public static Item pressurisedContainer;
 
     public static void init() {
         final Item[] items = new Item[]{
@@ -40,7 +41,8 @@ public class ZItems {
                 solderingIron = new ItemSolderingIron(),
                 stoneBoard = new ItemStoneBoard(),
                 pcbBlank = new ItemPcbBlank(),
-                pcbBasic = new ItemPcbBasic()
+                pcbBasic = new ItemPcbBasic(),
+                pressurisedContainer = new ItemPressurisedContainer()
         };
 
         for (int i = 0; i < items.length; i++) {

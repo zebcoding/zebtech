@@ -26,8 +26,9 @@ public class ContainerZechoriumCompressor extends Container{
     public ContainerZechoriumCompressor(InventoryPlayer player,
                                      TileEntityZechoriumCompressor tileEntityFurnace) {
         this.zechoriumCompressor = tileEntityFurnace;
-        this.addSlotToContainer(new Slot(tileEntityFurnace, 0, 56, 35));
-        this.addSlotToContainer(new SlotFurnace(player.player, tileEntityFurnace, 1, 116, 35));
+        this.addSlotToContainer(new Slot(tileEntityFurnace, 0, 56, 24));
+        this.addSlotToContainer(new Slot(tileEntityFurnace, 1, 56, 45));
+        this.addSlotToContainer(new SlotFurnace(player.player, tileEntityFurnace, 2, 116, 35));
 
         for (int i = 0; i < 3; ++i) {
             for (int j = 0; j < 9; ++j) {
